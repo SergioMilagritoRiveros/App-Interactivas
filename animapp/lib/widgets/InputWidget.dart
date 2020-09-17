@@ -7,25 +7,33 @@ class InputWidget extends StatelessWidget {
   final IconData icon;
   final String validateText;
   final bool enable;
+  final bool isPassword;
   final int minLines;
   final int maxLines;
   final int maxLength;
   final Function onChanged;
   final Function onSaved;
+  final Function onTap;
+  final Function validator;
+  final TextInputType keyboardType;
 
   const InputWidget({
     Key key,
     this.initialValue = '',
     @required this.labelText,
     this.hintText,
+    this.keyboardType,
     this.validateText = "Ingrese este campo",
     this.icon,
     this.enable = true,
+    this.isPassword = false,
     this.minLines = 1,
     this.maxLines = 1,
     this.maxLength,
     this.onChanged,
+    this.onTap,
     this.onSaved,
+    this.validator,
   }) : super(key: key);
 
   InputDecoration _inputDecoration() {
@@ -34,20 +42,25 @@ class InputWidget extends StatelessWidget {
       icon: _icon,
       labelText: labelText,
       hintText: hintText,
+      fillColor: Colors.pink
     );
   }
+String validatorDefault(String value) => value.isEmpty ? validateText : null;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+        keyboardType: keyboardType,
         enabled: enable,
         minLines: minLines,
         maxLines: maxLines,
         maxLength: maxLength,
+        obscureText: isPassword,
         initialValue: this.initialValue,
         decoration: _inputDecoration(),
-        validator: (value) => value.isEmpty ? validateText : null,
+        validator: validator ?? validatorDefault,
         onChanged: onChanged,
+        onTap: onTap,
         onSaved: onSaved,
         buildCounter: (BuildContext context,
             {int currentLength, int maxLength, bool isFocused}) {
