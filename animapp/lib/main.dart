@@ -1,7 +1,6 @@
-import 'package:animapp/forms/scheduleForm.dart';
+
+import 'package:animapp/forms/ScheduleForm.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/date_symbol_data_http_request.dart';
-import 'widgets/NavDrawer.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,7 +14,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    initializeDateFormatting('es',null);
+    //initializeDateFormatting('es',null);
     return MaterialApp(home: ScheduleForm());
   }
 }
