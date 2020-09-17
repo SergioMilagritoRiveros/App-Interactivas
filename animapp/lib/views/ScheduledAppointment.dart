@@ -22,6 +22,8 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
       body: ListView(
           scrollDirection: Axis.vertical,
           children: <Widget>[
+            SizedBox(height: 50),
+                Text("Tus Citas Agendadas", style: TextStyle(fontSize: 30.0), textAlign: TextAlign.center,),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Container(
