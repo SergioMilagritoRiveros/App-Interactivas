@@ -2,6 +2,8 @@ import 'package:animapp/widgets/NavDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+
+
 class ScheduleForm extends StatefulWidget {
   static const routeName = "/schedule-form";
 
@@ -20,7 +22,7 @@ class _ScheduleForm extends State<ScheduleForm> {
   TimeOfDay time = TimeOfDay.now();
 
   String getDate(DateTime date) =>
-      DateFormat('dd - MMMM - yyyy', 'es-CO').format(date);
+      DateFormat('dd - MMMM - yyyy').format(date);
 
   Widget _buildPet() {
     return FormField(
