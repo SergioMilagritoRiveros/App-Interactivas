@@ -1,3 +1,4 @@
+import 'package:animapp/widgets/InputWidget.dart';
 import 'package:animapp/widgets/NavDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -23,6 +24,8 @@ class _ScheduleForm extends State<ScheduleForm> {
 
   String getDate(DateTime date) =>
       DateFormat('dd - MMMM - yyyy').format(date);
+  String getTime(TimeOfDay time) =>
+      "${time.hour}:${time.minute}";
 
   Widget _buildPet() {
     return FormField(
@@ -92,7 +95,7 @@ class _ScheduleForm extends State<ScheduleForm> {
     TimeOfDay t = await showTimePicker(context: context, initialTime: time);
     if (t != null)
       setState(() {
-        _controllerTime.text = "t";
+        _controllerTime.text = getTime(t);
         time = t;
       });
   }
@@ -107,13 +110,18 @@ class _ScheduleForm extends State<ScheduleForm> {
       ),
       backgroundColor: Colors.amberAccent[50],
       body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: 10),
         child: Align(
             alignment: Alignment.center,
             child: Column(
               children: <Widget>[
                 SizedBox(height: 50),
                 Text("Agenda tu cita", style: TextStyle(fontSize: 30.0)),
-                SizedBox(height: 50),
+                SizedBox(height: 30),
+                Container(
+                    child: _buildPet(),
+                    width: MediaQuery.of(context).size.width),
+                SizedBox(height: 30),
                 TextFormField(
                   controller: _controller,
                   onTap: () => _selectDate(context),
@@ -123,7 +131,7 @@ class _ScheduleForm extends State<ScheduleForm> {
                     icon: Icon(Icons.today),
                   ),
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 30),
                 TextFormField(
                   controller: _controllerTime,
                   onTap: () => _pickTime(),
@@ -137,7 +145,7 @@ class _ScheduleForm extends State<ScheduleForm> {
                 //DateTimePickerPage(),
                 SizedBox(height: 30),
                 Container(
-                    child: _buildPet(),
+                    child: InputWidget(labelText: 'Número de contacto', icon: Icons.phone_android, keyboardType: TextInputType.phone,maxLength: 10,),
                     width: MediaQuery.of(context).size.width),
                 SizedBox(height: 30),
                 Row(
