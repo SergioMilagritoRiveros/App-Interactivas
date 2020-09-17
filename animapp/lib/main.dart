@@ -1,33 +1,19 @@
+import 'package:animapp/forms/scheduleForm.dart';
 import 'package:flutter/material.dart';
-
 import 'widgets/NavDrawer.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'AnimaApp',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(),
-    );
-  }
+  _MyAppState createState() => _MyAppState();
 }
 
-class MyHomePage extends StatelessWidget {
+class _MyAppState extends State<MyApp> {
+  final String pageName = 'AnimaApp';
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: NavDrawer(),
-      appBar: AppBar(
-        title: Text('AnimaApp'),
-      ),
-      body: Center(
-        child: Text('Aca pondre el resto'),
-      ),
-    );
+    return MaterialApp(home: ScheduleForm());
   }
 }
