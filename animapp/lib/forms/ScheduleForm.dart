@@ -145,7 +145,7 @@ class _ScheduleForm extends State<ScheduleForm> {
                 //DateTimePickerPage(),
                 SizedBox(height: 30),
                 Container(
-                    child: InputWidget(labelText: 'Número de contacto', icon: Icons.phone_android, keyboardType: TextInputType.phone,maxLength: 10),
+                    child: InputWidget(labelText: 'Número de contacto', icon: Icons.phone_android, keyboardType: TextInputType.phone),
                     width: MediaQuery.of(context).size.width),
                 SizedBox(height: 30),
                 Row(
