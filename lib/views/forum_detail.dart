@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pet_house/inputwidget.dart';
+import '../widgets/InputWidget.dart';
 import 'forum_model.dart';
 
 class ForumDetail extends StatefulWidget {
@@ -17,7 +17,11 @@ class _ForumDetailState extends State<ForumDetail> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(
+        title: Text('AnimaApp'),
+        backgroundColor: Colors.amber[700],
+      ),
+      backgroundColor: Colors.amberAccent[50],
       body: Column(
         children: [
           SizedBox(height: size.height / 40),

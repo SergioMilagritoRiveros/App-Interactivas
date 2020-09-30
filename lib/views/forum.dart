@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pet_house/forum_detail.dart';
-import 'package:pet_house/forum_model.dart';
-import 'package:pet_house/forum_new_post.dart';
-import 'package:pet_house/inputwidget.dart';
+
+import '../widgets/InputWidget.dart';
+import '../widgets/NavDrawer.dart';
+import 'forum_detail.dart';
+import 'forum_model.dart';
+import 'forum_new_post.dart';
 
 class Forum extends StatefulWidget {
   final String title;
@@ -17,7 +19,12 @@ class _ForumState extends State<Forum> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      drawer: NavDrawer(),
+      appBar: AppBar(
+        title: Text('AnimaApp'),
+        backgroundColor: Colors.amber[700],
+      ),
+      backgroundColor: Colors.amberAccent[50],
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: size.width / 20),
         child: Column(
@@ -57,14 +64,14 @@ class _ForumState extends State<Forum> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.yellowAccent[100],
+        backgroundColor: Colors.amber[700],
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => ForumNewPost(title: widget.title),
           ),
         ),
-        child: Icon(Icons.add, color: Colors.black),
+        child: Icon(Icons.add, color: Colors.white),
       ),
     );
   }

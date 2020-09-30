@@ -10,7 +10,7 @@ class ForumModel {
   ForumModel({
     this.messages,
     this.imageURL =
-        'https://abhipraay.org/assets/Themes/default/images/album-default.png',
+        'https://static3.teletica.com/Files/Sizes/2020/3/6/1346659218_760x520.jpg',
     @required this.author,
     @required this.title,
     this.reactions = 0,

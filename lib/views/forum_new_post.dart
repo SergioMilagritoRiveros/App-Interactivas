@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pet_house/inputwidget.dart';
+
+import '../widgets/InputWidget.dart';
 
 class ForumNewPost extends StatefulWidget {
   final String title;
@@ -14,7 +15,11 @@ class _ForumNewPostState extends State<ForumNewPost> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(
+        title: Text('AnimaApp'),
+        backgroundColor: Colors.amber[700],
+      ),
+      backgroundColor: Colors.amberAccent[50],
       body: Container(
         padding: EdgeInsets.symmetric(
             horizontal: size.width / 25, vertical: size.height / 50),
@@ -44,16 +49,16 @@ class _ForumNewPostState extends State<ForumNewPost> {
             ),
             SizedBox(height: size.height / 30),
             RaisedButton(
-              color: Colors.yellowAccent[100],
+              color: Colors.amber[700],
               onPressed: () => Navigator.pop(context),
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: size.height / 50),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text('Publicar'),
+                    Text('Publicar',style: TextStyle(color: Colors.white),),
                     SizedBox(width: size.width / 25),
-                    Icon(Icons.send),
+                    Icon(Icons.send, color: Colors.white,),
                   ],
                 ),
               ),
