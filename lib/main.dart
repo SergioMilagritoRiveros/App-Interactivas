@@ -1,23 +1,25 @@
-
-import 'package:animapp/forms/ScheduleForm.dart';
-import 'package:animapp/forms/rememberPassword.dart';
-import 'package:animapp/views/RoutePet.dart';
-import 'package:animapp/views/ScheduledAppointment.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'views/welcomePage.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  final String pageName = 'AnimaApp';
-
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    //initializeDateFormatting('es',null);
-    return MaterialApp(home: RoutePet());
+    final textTheme = Theme.of(context).textTheme;
+    return MaterialApp(
+      title: 'Animapp',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        textTheme: GoogleFonts.latoTextTheme(textTheme).copyWith(
+          bodyText1: GoogleFonts.montserrat(textStyle: textTheme.bodyText1),
+        ),
+      ),
+      debugShowCheckedModeBanner: false,
+      home: WelcomePage(),
+    );
   }
 }
