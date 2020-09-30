@@ -13,6 +13,7 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
+  Size size;
   Widget _submitButton() {
     return InkWell(
       onTap: () {
@@ -79,13 +80,14 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
   Widget _image() {
-    return Image.network(
-        '',
-        width: 100.0);
+    return Image.asset(
+        'images/huellita.png',
+        height: size.height / 5);
   }
 
   @override
   Widget build(BuildContext context) {
+    size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
