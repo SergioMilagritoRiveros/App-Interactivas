@@ -106,7 +106,7 @@ class _ScheduleForm extends State<ScheduleForm> {
       drawer: NavDrawer(),
       appBar: AppBar(
         title: Text('AnimaApp'),
-        backgroundColor: Colors.amber[300],
+        backgroundColor: Colors.amber[700],
       ),
       backgroundColor: Colors.amberAccent[50],
       body: SingleChildScrollView(

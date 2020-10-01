@@ -16,7 +16,7 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
       drawer: NavDrawer(),
       appBar: AppBar(
         title: Text('AnimaApp'),
-        backgroundColor: Colors.amber[300],
+        backgroundColor: Colors.amber[700],
       ),
       backgroundColor: Colors.amberAccent[50],
       body: ListView(
