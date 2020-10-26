@@ -92,7 +92,7 @@ class _WelcomePageState extends State<WelcomePage> {
     );
   }
 
-    Widget _signUpButtonLandscape() {
+  Widget _signUpButtonLandscape() {
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -129,7 +129,7 @@ class _WelcomePageState extends State<WelcomePage> {
     );
   }
 
-    Widget _titleLandscape() {
+  Widget _titleLandscape() {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
@@ -220,27 +220,34 @@ class _WelcomePageState extends State<WelcomePage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Column(children: [
-                  SizedBox(
-                    height: 60,
-                  ),
-                  _titleLandscape(),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  _imageLandscape(),
-                ]),
+                Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(children: [
+                        SizedBox(
+                          height: 60,
+                        ),
+                        _titleLandscape()
+                      ]),
+                      Row(children: [
+                        SizedBox(
+                          height: 20,
+                        ),
+                        _imageLandscape()
+                      ]),
+                    ]),
                 Column(children: [SizedBox(width: 80)]),
-                Column(children: [
-                  SizedBox(
-                    height: 250,
-                  ),
-                  _submitButtonLandscape(),
-                  SizedBox(
-                    height: size.width / 15,
-                  ),
-                  _signUpButtonLandscape(),
-                ]),
+                Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _submitButtonLandscape(),
+                      SizedBox(
+                        height: size.width / 15,
+                      ),
+                      _signUpButtonLandscape(),
+                    ]),
               ]));
     }
   }
