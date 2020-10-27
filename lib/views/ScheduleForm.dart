@@ -3,18 +3,15 @@ import 'package:animapp/widgets/NavDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-
-
 class ScheduleForm extends StatefulWidget {
-  static const routeName = "/schedule-form";
+  final bool isIntoWidget;
+  ScheduleForm({Key key, this.isIntoWidget = false}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() {
-    return _ScheduleForm();
-  }
+  _ScheduleFormState createState() => _ScheduleFormState();
 }
 
-class _ScheduleForm extends State<ScheduleForm> {
+class _ScheduleFormState extends State<ScheduleForm> {
   String dropdownValue = 'Perro';
 
   TextEditingController _controller = TextEditingController();
@@ -22,10 +19,8 @@ class _ScheduleForm extends State<ScheduleForm> {
   DateTime _dateTime = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
 
-  String getDate(DateTime date) =>
-      DateFormat('dd - MMMM - yyyy').format(date);
-  String getTime(TimeOfDay time) =>
-      "${time.hour}:${time.minute}";
+  String getDate(DateTime date) => DateFormat('dd - MMMM - yyyy').format(date);
+  String getTime(TimeOfDay time) => "${time.hour}:${time.minute}";
 
   Widget _buildPet() {
     return FormField(
@@ -52,27 +47,6 @@ class _ScheduleForm extends State<ScheduleForm> {
         );
       },
     );
-    /* return DropdownButton<String>(
-      value: 'Perro',
-      iconSize: 24,
-      elevation: 16,
-      underline: Container(
-        height: 2,
-        color: Colors.grey[400],
-      ),
-      onChanged: (String newValue) {
-        setState(() {
-          dropdownValue = newValue;
-        });
-      },
-      items: <String>['Perro', 'Gato']
-          .map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-    ); */
   }
 
   void _selectDate(context) async {
@@ -100,8 +74,87 @@ class _ScheduleForm extends State<ScheduleForm> {
       });
   }
 
+  Widget _schedulingForm() {
+    return ListView(
+      children: <Widget>[
+        Text(
+          "Agenda tu cita",
+          style: TextStyle(fontSize: 30.0),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: 30),
+        Container(child: _buildPet(), width: MediaQuery.of(context).size.width),
+        SizedBox(height: 30),
+        TextFormField(
+          controller: _controller,
+          onTap: () => _selectDate(context),
+          decoration: InputDecoration(
+            enabled: true,
+            labelText: 'Fecha de la cita',
+            icon: Icon(Icons.today),
+          ),
+        ),
+        SizedBox(height: 30),
+        TextFormField(
+          controller: _controllerTime,
+          onTap: () => _pickTime(),
+          decoration: InputDecoration(
+            enabled: true,
+            labelText: 'Hora de la cita',
+            icon: Icon(Icons.access_time),
+          ),
+        ),
+        SizedBox(height: 30),
+        Container(
+            child: InputWidget(
+                labelText: 'Número de contacto',
+                icon: Icons.phone_android,
+                keyboardType: TextInputType.phone),
+            width: MediaQuery.of(context).size.width),
+        SizedBox(height: 30),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              margin: EdgeInsets.only(right: 15),
+              child: RaisedButton(
+                textColor: Colors.white,
+                color: Colors.green[300],
+                onPressed: () => '',
+                child: Container(
+                  child: new Text("Agendar"),
+                  width: MediaQuery.of(context).size.width / 7,
+                ),
+              ),
+            ),
+            RaisedButton(
+              onPressed: () => '',
+              textColor: Colors.white,
+              color: Colors.red[300],
+              child: Container(
+                child: new Text("Cancelar"),
+                width: MediaQuery.of(context).size.width / 7,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    var phoneSize = MediaQuery.of(context).size;
+    if (widget.isIntoWidget) {
+      return Card(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: _schedulingForm(),
+        ),
+      );
+    }
     return Scaffold(
       drawer: NavDrawer(),
       appBar: AppBar(
@@ -109,74 +162,11 @@ class _ScheduleForm extends State<ScheduleForm> {
         backgroundColor: Colors.amber[700],
       ),
       backgroundColor: Colors.amberAccent[50],
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Align(
-            alignment: Alignment.center,
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 50),
-                Text("Agenda tu cita", style: TextStyle(fontSize: 30.0)),
-                SizedBox(height: 30),
-                Container(
-                    child: _buildPet(),
-                    width: MediaQuery.of(context).size.width),
-                SizedBox(height: 30),
-                TextFormField(
-                  controller: _controller,
-                  onTap: () => _selectDate(context),
-                  decoration: InputDecoration(
-                    enabled: true,
-                    labelText: 'Fecha de la cita',
-                    icon: Icon(Icons.today),
-                  ),
-                ),
-                SizedBox(height: 30),
-                TextFormField(
-                  controller: _controllerTime,
-                  onTap: () => _pickTime(),
-                  decoration: InputDecoration(
-                    enabled: true,
-                    labelText: 'Hora de la cita',
-                    icon: Icon(Icons.access_time),
-                  ),
-                ),
-                //SizedBox(height: 30,),
-                //DateTimePickerPage(),
-                SizedBox(height: 30),
-                Container(
-                    child: InputWidget(labelText: 'Número de contacto', icon: Icons.phone_android, keyboardType: TextInputType.phone),
-                    width: MediaQuery.of(context).size.width),
-                SizedBox(height: 30),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(right: 15),
-                      child: RaisedButton(
-                        textColor: Colors.white,
-                        color: Colors.green[300],
-                        onPressed: () => '',
-                        child: Container(
-                          child: new Text("Agendar"),
-                          width: MediaQuery.of(context).size.width / 7,
-                        ),
-                      ),
-                    ),
-                    RaisedButton(
-                      onPressed: () => '',
-                      textColor: Colors.white,
-                      color: Colors.red[300],
-                      child: Container(
-                        child: new Text("Cancelar"),
-                        width: MediaQuery.of(context).size.width / 7,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            )),
-      ),
+      body: Container(
+          padding: EdgeInsets.symmetric(
+              horizontal: phoneSize.width / 30,
+              vertical: phoneSize.height / 50),
+          child: _schedulingForm()),
     );
   }
 }
