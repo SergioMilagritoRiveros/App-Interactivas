@@ -9,19 +9,70 @@ class PlaceDetail extends StatefulWidget {
 }
 
 class _PlaceDetailState extends State<PlaceDetail> {
+  bool isScheduling;
+
+  @override
+  void initState() {
+    super.initState();
+    isScheduling = false;
+  }
+
+  Widget _scheduling(BuildContext context) {
+    var phoneSize = MediaQuery.of(context).size;
+    return Stack(
+      children: [
+        _getBackground(),
+        _getGradient(),
+        Row(
+          children: [
+            Container(
+              width: phoneSize.width / 3,
+              height: phoneSize.height / 1.11,
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).padding.top + 10,
+                left: phoneSize.width / 20,
+              ),
+              child: _getContent(Orientation.landscape),
+            ),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).padding.top + 10,
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                height: phoneSize.height / 1.04,
+                child: ScheduleForm(isIntoWidget: true),
+              ),
+            ),
+          ],
+        ),
+        _getToolbar(context),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        constraints: BoxConstraints.expand(),
-        color: new Color(0xFFff9327),
-        child: Stack(children: <Widget>[
-          _getBackground(),
-          _getGradient(),
-          _getContent(),
-          _getToolbar(context)
-        ]),
-      ),
+    return OrientationBuilder(
+      builder: (BuildContext context, Orientation orientation) {
+        if (Orientation.landscape == orientation) {
+          if (isScheduling) {
+            return Scaffold(body: _scheduling(context));
+          }
+        }
+        return Scaffold(
+          body: Container(
+            constraints: BoxConstraints.expand(),
+            color: new Color(0xFFff9327),
+            child: Stack(children: <Widget>[
+              _getBackground(),
+              _getGradient(),
+              Center(child: _getContent(orientation)),
+              _getToolbar(context)
+            ]),
+          ),
+        );
+      },
     );
   }
 
@@ -42,7 +93,7 @@ class _PlaceDetailState extends State<PlaceDetail> {
       height: 110.0,
       decoration: BoxDecoration(
           gradient: LinearGradient(
-        colors: <Color>[new Color(0x00ffa247), new Color(0xFFff9326)],
+        colors: <Color>[Color(0x00ffa247), Color(0xFFff9326)],
         stops: [0.0, 0.9],
         begin: const FractionalOffset(0.0, 0.0),
         end: const FractionalOffset(0.0, 1.0),
@@ -50,99 +101,102 @@ class _PlaceDetailState extends State<PlaceDetail> {
     );
   }
 
-  Widget _getContent() {
-    return Align(
-      alignment: Alignment(0.09, 0.5),
-      child: Container(
-        width: 310,
-        height: 400,
-        child: new Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
+  Widget _getContent(Orientation orientation) {
+    var phoneSize = MediaQuery.of(context).size;
+    var width;
+    var height;
+    if (orientation == Orientation.portrait) {
+      width = phoneSize.width / 1.2;
+      height = phoneSize.height / 2;
+    } else {
+      width = phoneSize.width / 2.5;
+      height = phoneSize.height / 1.15;
+    }
+    return Container(
+      width: width,
+      height: height,
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        elevation: 15,
+        child: ListView(
+          children: <Widget>[
+            ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.white,
+                backgroundImage: AssetImage('images/image-card2.png'),
+              ),
+              title: Text('Mayo Pet shop', style: TextStyle(fontSize: 20)),
             ),
-            elevation: 15,
-            child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-              const ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  backgroundImage: AssetImage('images/image-card2.png'),
+            Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+                  child: Text("4.0", style: TextStyle(color: Colors.grey)),
                 ),
-                title: Text(
-                  'Mayo Pet shop',
-                  style: TextStyle(fontSize: 20),
-                ),
+                _stars(),
+              ],
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(15, 2, 15, 15),
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Tienda para articulos de mascotas",
+                style: TextStyle(color: Colors.grey),
               ),
-              Row(
-                children: [
-                  Container(
-                      padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
-                      child: Text(
-                        "4.0",
-                        style: TextStyle(color: Colors.grey),
-                      )),
-                  _stars(),
-                ],
+            ),
+            Divider(height: 1.0, indent: 1.0),
+            ListTile(
+              leading: Icon(Icons.place),
+              title: Text(
+                'Cl. 165 ##8H-50, Bogotá, Cundinamarca',
+                style: TextStyle(fontSize: 12),
               ),
-              Container(
-                  padding: EdgeInsets.fromLTRB(15, 2, 15, 15),
-                  alignment: Alignment.topLeft,
-                  child: Text("Tienda para articulos de mascotas",
-                      style: TextStyle(color: Colors.grey))),
-              new Divider(
-                height: 1.0,
-                indent: 1.0,
+            ),
+            Divider(height: 1.0, indent: 1.0),
+            ListTile(
+              leading: Icon(Icons.watch_later),
+              title: Text(
+                'Cerrado.   Abre a la(s) 10:00 a.m.',
+                style: TextStyle(fontSize: 12),
               ),
-              ListTile(
-                leading: Icon(Icons.place),
-                title: Text(
-                  'Cl. 165 ##8H-50, Bogotá, Cundinamarca',
-                  style: TextStyle(fontSize: 12),
-                ),
-              ),
-              new Divider(
-                height: 1.0,
-                indent: 1.0,
-              ),
-              ListTile(
-                leading: Icon(Icons.watch_later),
-                title: Text(
-                  'Cerrado.   Abre a la(s) 10:00 a.m.',
-                  style: TextStyle(fontSize: 12),
-                ),
-              ),
-              new Divider(
-                height: 1.0,
-                indent: 1.0,
-              ),
-              ListTile(
-                leading: Icon(Icons.phone),
-                title: Text(
-                  '(1)8277777',
-                  style: TextStyle(fontSize: 12),
-                ),
-              ),
-              ButtonBar(
-                children: <Widget>[
-                  FlatButton(
-                    child: const Text('Agendar Cita',),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ScheduleForm()));
-                    },
-                  ),
-                ],
-              ),
-            ])),
+            ),
+            Divider(height: 1.0, indent: 1.0),
+            ListTile(
+              leading: Icon(Icons.phone),
+              title: Text('(1)8277777', style: TextStyle(fontSize: 12)),
+            ),
+            orientation == Orientation.portrait || !isScheduling
+                ? ButtonBar(
+                    children: <Widget>[
+                      FlatButton(
+                        child: Text('Agendar Cita'),
+                        onPressed: () {
+                          if (orientation == Orientation.landscape) {
+                            setState(() => isScheduling = true);
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ScheduleForm()),
+                            );
+                          }
+                        },
+                      ),
+                    ],
+                  )
+                : Container(height: 0),
+          ],
+        ),
       ),
     );
   }
 
   Container _getToolbar(BuildContext context) {
-    return new Container(
-      margin: new EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-      child: new BackButton(color: Colors.white),
+    return Container(
+      margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+      child: BackButton(color: Colors.white),
     );
   }
 
@@ -158,23 +212,6 @@ class _PlaceDetailState extends State<PlaceDetail> {
           );
         }),
       ),
-    );
-  }
-
-  Widget _others() {
-    return ListView(
-      children: [
-        ListTile(
-          //leading: Icon(Icons.place),
-          title: Text(
-            'Cl. 165 ##8H-50, Bogotá, Cundinamarca',
-          ),
-        ),
-        new Divider(
-          height: 1.0,
-          indent: 1.0,
-        ),
-      ],
     );
   }
 }
