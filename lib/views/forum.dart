@@ -1,4 +1,3 @@
-
 import 'package:animapp/views/ScheduleForm.dart';
 import 'package:animapp/views/ScheduledAppointment.dart';
 import 'package:animapp/views/placeDetail.dart';

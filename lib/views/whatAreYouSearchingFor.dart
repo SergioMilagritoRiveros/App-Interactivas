@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../widgets/InputWidget.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:animapp/views/placeDetail.dart';
 import '../widgets/bezierContainer.dart';
-import 'forgottenPassword.dart';
-import 'signup.dart';
 
 class WhatAreYouSearchingFor extends StatefulWidget {
   WhatAreYouSearchingFor({Key key, this.title}) : super(key: key);
@@ -21,10 +19,14 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
   bool _veterinaria = false;
   bool _agendamientoDigital = false;
 
+  BitmapDescriptor pinLocationIcon;
+  Set<Marker> _markers = {};
+  GoogleMapController _controller;
+
   Widget _submitButton() {
     return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 15),
+      width: MediaQuery.of(context).size.width - 90,
+      padding: EdgeInsets.symmetric(vertical: 10),
       alignment: Alignment.center,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -32,7 +34,7 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
             BoxShadow(
                 color: Colors.grey.shade200,
                 offset: Offset(2, 4),
-                blurRadius: 5,
+                blurRadius: 4,
                 spreadRadius: 2)
           ],
           gradient: LinearGradient(
@@ -52,11 +54,11 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
       child: Row(
         children: <Widget>[
           SizedBox(
-            width: 20,
+            width: 10,
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(horizontal: 5),
               child: Divider(
                 thickness: 1,
               ),
@@ -89,14 +91,14 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
           ),
         ),
       ),
-      SizedBox(height: 30),
+      SizedBox(height: 10),
       RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
           text: '¿Qué buscas?',
           style: GoogleFonts.portLligatSans(
             textStyle: Theme.of(context).textTheme.display1,
-            fontSize: 30,
+            fontSize: 20,
             fontWeight: FontWeight.w700,
             color: Colors.black,
           ),
@@ -152,15 +154,29 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    return Scaffold(
-        body: Container(
+    var size = MediaQuery.of(context).size;
+    var height = MediaQuery.of(context).size.height - 10;
+    var width = MediaQuery.of(context).size.width;
+    return Scaffold(body: OrientationBuilder(
+        builder: (BuildContext context, Orientation orientation) {
+      if (Orientation.portrait == orientation) {
+        return formulario(height, width);
+      } else {
+        setMarkers();
+        return formularioHorizontal(size, height);
+      }
+    }));
+  }
+
+  Widget formulario(height, width) {
+    return Container(
       height: height,
+      width: width,
       child: Stack(
         children: <Widget>[
           Positioned(
-              top: -height * .15,
-              right: -MediaQuery.of(context).size.width * .4,
+              top: -height * .25,
+              right: -MediaQuery.of(context).size.width * .5,
               child: BezierContainer()),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
@@ -183,6 +199,50 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
           ),
         ],
       ),
-    ));
+    );
+  }
+
+  Widget formularioHorizontal(Size size, height) {
+    return Row(children: [
+      Container(
+        width: size.width / 3,
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: MediaQuery.of(context).size.height / 99),
+            _listaOpciones(),
+            SizedBox(height: .20),
+            _submitButton(),
+            _divider(),
+            SizedBox(height: MediaQuery.of(context).size.height * .1),
+          ],
+        ),
+      ),
+      Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width * .65,
+        child: GoogleMap(
+          markers: _markers,
+          onMapCreated: (GoogleMapController controller) {
+            _controller = controller;
+          },
+          initialCameraPosition: CameraPosition(
+              target: LatLng(4.742877841155348, -74.03123976473584),
+              zoom: 15.0),
+        ),
+      )
+    ]);
+  }
+
+  setMarkers() {
+    _markers.add(
+      Marker(
+        markerId: MarkerId('llegar'),
+        position: LatLng(4.742877841155348, -74.03123976473584),
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => PlaceDetail()),
+        ),
+      ),
+    );
   }
 }
