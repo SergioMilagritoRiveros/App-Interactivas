@@ -1,3 +1,4 @@
+import 'package:animapp/views/welcomePage.dart';
 import 'package:flutter/material.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -38,7 +39,9 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Cerrar sesión'),
-            onTap: () => {},
+            onTap: () => {Navigator.push(context, MaterialPageRoute(
+                        builder: (context) =>
+                            WelcomePage()))},
           ),
         ],
       ),

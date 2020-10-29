@@ -14,7 +14,7 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   Size size;
-  Widget _submitButton() {
+  Widget _submitButtonPortrait() {
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -42,7 +42,35 @@ class _WelcomePageState extends State<WelcomePage> {
     );
   }
 
-  Widget _signUpButton() {
+  Widget _submitButtonLandscape() {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LoginPage()));
+      },
+      child: Container(
+        width: size.width / 2,
+        padding: EdgeInsets.symmetric(vertical: 13),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: Color(0xffdf8e33).withAlpha(100),
+                  offset: Offset(2, 4),
+                  blurRadius: 8,
+                  spreadRadius: 2)
+            ],
+            color: Colors.white),
+        child: Text(
+          'Ingresar',
+          style: TextStyle(fontSize: 20, color: Color(0xfff7892b)),
+        ),
+      ),
+    );
+  }
+
+  Widget _signUpButtonPortrait() {
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -64,14 +92,36 @@ class _WelcomePageState extends State<WelcomePage> {
     );
   }
 
-  Widget _title() {
+  Widget _signUpButtonLandscape() {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => SignUpPage()));
+      },
+      child: Container(
+        width: size.width / 2,
+        padding: EdgeInsets.symmetric(vertical: 13),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          border: Border.all(color: Colors.white, width: 2),
+        ),
+        child: Text(
+          'Registrarse',
+          style: TextStyle(fontSize: 20, color: Colors.white),
+        ),
+      ),
+    );
+  }
+
+  Widget _titlePortrait() {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
         text: 'Animapp',
         style: GoogleFonts.portLligatSans(
-          textStyle: Theme.of(context).textTheme.display1,
-          fontSize: 30,
+          textStyle: Theme.of(context).textTheme.headline4,
+          fontSize: size.width / 8,
           fontWeight: FontWeight.w700,
           color: Colors.white,
         ),
@@ -79,18 +129,78 @@ class _WelcomePageState extends State<WelcomePage> {
     );
   }
 
-  Widget _image() {
-    return Image.asset(
-        'images/huellita.png',
-        height: size.height / 5);
+  Widget _titleLandscape() {
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+        text: 'Animapp',
+        style: GoogleFonts.portLligatSans(
+          textStyle: Theme.of(context).textTheme.headline4,
+          fontSize: size.width / 10,
+          fontWeight: FontWeight.w700,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+
+  Widget _imagePortrait() {
+    return Image.asset('images/huellita.png', height: size.height / 5);
+  }
+
+  Widget _imageLandscape() {
+    return Image.asset('images/huellita.png', height: size.height / 2);
   }
 
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
+    return Scaffold(body: _layoutDetails());
+  }
+
+  Widget _layoutDetails() {
+    Orientation orientation = MediaQuery.of(context).orientation;
+
+    if (orientation == Orientation.portrait) {
+      return SingleChildScrollView(
+          child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: Colors.grey.shade200,
+                  offset: Offset(2, 4),
+                  blurRadius: 5,
+                  spreadRadius: 2)
+            ],
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Color(0xfffbb448), Color(0xffe46b10)])),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            _titlePortrait(),
+            SizedBox(
+              height: 20,
+            ),
+            _imagePortrait(),
+            SizedBox(
+              height: 50,
+            ),
+            _submitButtonPortrait(),
+            SizedBox(
+              height: 20,
+            ),
+            _signUpButtonPortrait(),
+          ],
+        ),
+      ));
+    } else {
+      return Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
@@ -106,27 +216,39 @@ class _WelcomePageState extends State<WelcomePage> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [Color(0xfffbb448), Color(0xffe46b10)])),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              _title(),
-              SizedBox(
-                height: 20,
-              ),
-              _image(),
-              SizedBox(
-                height: 50,
-              ),
-              _submitButton(),
-              SizedBox(
-                height: 20,
-              ),
-              _signUpButton(),
-            ],
-          ),
-        ),
-      ),
-    );
+          child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(children: [
+                        SizedBox(
+                          height: 60,
+                        ),
+                        _titleLandscape()
+                      ]),
+                      Row(children: [
+                        SizedBox(
+                          height: 20,
+                        ),
+                        _imageLandscape()
+                      ]),
+                    ]),
+                Column(children: [SizedBox(width: 80)]),
+                Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _submitButtonLandscape(),
+                      SizedBox(
+                        height: size.width / 15,
+                      ),
+                      _signUpButtonLandscape(),
+                    ]),
+              ]));
+    }
   }
 }

@@ -2,8 +2,6 @@ import 'package:animapp/views/forum.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'views/welcomePage.dart';
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
