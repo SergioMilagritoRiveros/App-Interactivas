@@ -9,7 +9,6 @@ class ScheduledAppointment extends StatefulWidget {
 }
 
 class _ScheduledAppointmentState extends State<ScheduledAppointment> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,118 +18,248 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
         backgroundColor: Colors.amber[700],
       ),
       backgroundColor: Colors.amberAccent[50],
-      body: ListView(
-          scrollDirection: Axis.vertical,
-          children: <Widget>[
-            SizedBox(height: 50),
-                Text("Tus Citas Agendadas", style: TextStyle(fontSize: 30.0), textAlign: TextAlign.center,),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Container(
-                child: new FittedBox(
-                  child: Material(
-                      color: Colors.white,
-                      elevation: 14.0,
-                      borderRadius: BorderRadius.circular(24.0),
-                      shadowColor: Color(0x802196F3),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Container(
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 16.0),
-                              child: myDetailsContainer1(),
-                            ),
-                          ),
-                          Container(
-                            width: 250,
-                            height: 200,
-                            child: ClipRRect(
-                              borderRadius: new BorderRadius.circular(24.0),
-                              child: Image(
-                                fit: BoxFit.contain,
-                                alignment: Alignment.topRight,
-                                image: AssetImage('images/image-card.jpg'),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Container(
-                child: new FittedBox(
-                  child: Material(
-                      color: Colors.white,
-                      elevation: 14.0,
-                      borderRadius: BorderRadius.circular(24.0),
-                      shadowColor: Color(0x802196F3),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Container(
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 16.0),
-                              child: myDetailsContainer3(),
-                            ),
-                          ),
-                          Container(
-                            width: 250,
-                            height: 180,
-                            child: ClipRRect(
-                              borderRadius: new BorderRadius.circular(24.0),
-                              child: Image(
-                                fit: BoxFit.contain,
-                                alignment: Alignment.topRight,
-                                image: AssetImage('images/image-card.jpg'),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Container(
-                child: new FittedBox(
-                  child: Material(
-                      color: Colors.white,
-                      elevation: 14.0,
-                      borderRadius: BorderRadius.circular(24.0),
-                      shadowColor: Color(0x802196F3),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Container(
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 16.0),
-                              child: myDetailsContainer2(),
-                            ),
-                          ),
-                          Container(
-                            width: 250,
-                            height: 180,
-                            child: ClipRRect(
-                              borderRadius: new BorderRadius.circular(24.0),
-                              child: Image(
-                                fit: BoxFit.contain,
-                                alignment: Alignment.topRight,
-                                image: AssetImage('images/image-card.jpg'),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )),
-                ),
-              ),
-            ),
-          ],
+      body: OrientationBuilder(
+        builder: (BuildContext context, Orientation orientation) {
+          var size = MediaQuery.of(context).size;
+          if (orientation == Orientation.portrait) {
+            return _buildPortrait(size);
+          } else {
+            return _buildLandscape(size);
+          }
+        },
       ),
+    );
+  }
+
+  Widget _buildLandscape(Size size) {
+    return ListView(
+      scrollDirection: Axis.vertical,
+      children: <Widget>[
+        SizedBox(height: size.height / 50),
+        Text(
+          "Tus Citas Agendadas",
+          style: TextStyle(fontSize: 30.0),
+          textAlign: TextAlign.center,
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(vertical: size.height / 50),
+          height: size.height / 4,
+          child: new FittedBox(
+            child: Material(
+              color: Colors.white,
+              elevation: 14.0,
+              borderRadius: BorderRadius.circular(24.0),
+              shadowColor: Color(0x802196F3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: size.width / 50),
+                      child: myDetailsContainer1(),
+                    ),
+                  ),
+                  Container(
+                    height: size.height / 3,
+                    child: ClipRRect(
+                      borderRadius: new BorderRadius.circular(24.0),
+                      child: Image(
+                        fit: BoxFit.contain,
+                        alignment: Alignment.topRight,
+                        image: AssetImage('images/image-card.jpg'),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(vertical: size.height / 50),
+          height: size.height / 4,
+          child: new FittedBox(
+            child: Material(
+              color: Colors.white,
+              elevation: 14.0,
+              borderRadius: BorderRadius.circular(24.0),
+              shadowColor: Color(0x802196F3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: size.width / 50),
+                      child: myDetailsContainer2(),
+                    ),
+                  ),
+                  Container(
+                    height: size.height / 3,
+                    child: ClipRRect(
+                      borderRadius: new BorderRadius.circular(24.0),
+                      child: Image(
+                        fit: BoxFit.contain,
+                        alignment: Alignment.topRight,
+                        image: AssetImage('images/image-card.jpg'),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Container(
+          height: size.height / 4,
+          margin: EdgeInsets.symmetric(vertical: size.height / 50),
+          child: new FittedBox(
+            child: Material(
+              color: Colors.white,
+              elevation: 14.0,
+              borderRadius: BorderRadius.circular(24.0),
+              shadowColor: Color(0x802196F3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: size.width / 50),
+                      child: myDetailsContainer3(),
+                    ),
+                  ),
+                  Container(
+                    height: size.height / 3,
+                    child: ClipRRect(
+                      borderRadius: new BorderRadius.circular(24.0),
+                      child: Image(
+                        fit: BoxFit.contain,
+                        alignment: Alignment.topRight,
+                        image: AssetImage('images/image-card.jpg'),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPortrait(Size size) {
+    return ListView(
+      scrollDirection: Axis.vertical,
+      children: <Widget>[
+        SizedBox(height: size.height / 50),
+        Text(
+          "Tus Citas Agendadas",
+          style: TextStyle(fontSize: 30.0),
+          textAlign: TextAlign.center,
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(
+              horizontal: size.width / 45, vertical: size.height / 50),
+          child: new FittedBox(
+            child: Material(
+              color: Colors.white,
+              elevation: 14.0,
+              borderRadius: BorderRadius.circular(24.0),
+              shadowColor: Color(0x802196F3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: size.width / 50),
+                      child: myDetailsContainer1(),
+                    ),
+                  ),
+                  Container(
+                    height: size.height / 5,
+                    child: ClipRRect(
+                      borderRadius: new BorderRadius.circular(24.0),
+                      child: Image(
+                        fit: BoxFit.contain,
+                        alignment: Alignment.topRight,
+                        image: AssetImage('images/image-card.jpg'),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(
+              horizontal: size.width / 45, vertical: size.height / 50),
+          child: new FittedBox(
+            child: Material(
+              color: Colors.white,
+              elevation: 14.0,
+              borderRadius: BorderRadius.circular(24.0),
+              shadowColor: Color(0x802196F3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: size.width / 50),
+                      child: myDetailsContainer2(),
+                    ),
+                  ),
+                  Container(
+                    height: size.height / 5,
+                    child: ClipRRect(
+                      borderRadius: new BorderRadius.circular(24.0),
+                      child: Image(
+                        fit: BoxFit.contain,
+                        alignment: Alignment.topRight,
+                        image: AssetImage('images/image-card.jpg'),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(
+              horizontal: size.width / 45, vertical: size.height / 50),
+          child: new FittedBox(
+            child: Material(
+              color: Colors.white,
+              elevation: 14.0,
+              borderRadius: BorderRadius.circular(24.0),
+              shadowColor: Color(0x802196F3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: size.width / 50),
+                      child: myDetailsContainer3(),
+                    ),
+                  ),
+                  Container(
+                    height: size.height / 5,
+                    child: ClipRRect(
+                      borderRadius: new BorderRadius.circular(24.0),
+                      child: Image(
+                        fit: BoxFit.contain,
+                        alignment: Alignment.topRight,
+                        image: AssetImage('images/image-card.jpg'),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -194,7 +323,7 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
           padding: const EdgeInsets.only(left: 8.0),
           child: Container(
               child: Text(
-            "Veterinaria Mi perrito feliz \u00B7 23/09/2020  9:00 am",
+            "Veterinaria perro feliz \u00B7 23/09/2020  9:00 am",
             style: TextStyle(
                 color: Colors.black54,
                 fontSize: 24.0,

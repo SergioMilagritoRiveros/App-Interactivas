@@ -6,7 +6,12 @@ import 'forum_model.dart';
 class ForumDetail extends StatefulWidget {
   final String title;
   final ForumModel forum;
-  ForumDetail({Key key, @required this.title, @required this.forum})
+  final bool isWidget;
+  ForumDetail(
+      {Key key,
+      @required this.title,
+      @required this.forum,
+      this.isWidget = false})
       : super(key: key);
 
   @override
@@ -17,23 +22,88 @@ class _ForumDetailState extends State<ForumDetail> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return ResponsiveBuilder(
-      builder: (context, sizing) => Scaffold(
-        appBar: sizing.isMobile
-            ? AppBar(
-                title: Text("Animapp"),
-                backgroundColor: Colors.amber[700],
-              )
-            : null,
-        body: ResponsiveBuilder(
-          builder: (context, sizing) {
-            if (sizing.deviceScreenType == DeviceScreenType.mobile) {
-              return _forumDetailBody(size);
-            }
+    if (widget.isWidget) {
+      return _forumDetailWidget(size);
+    }
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('AnimaApp'),
+        backgroundColor: Colors.amber[700],
+      ),
+      backgroundColor: Colors.amberAccent[50],
+      body: OrientationBuilder(
+        builder: (BuildContext context, Orientation orientation) {
+          if (Orientation.portrait == orientation) {
             return _forumDetailBody(size);
+          } else {
+            return _forumdetailLandscapeBody(size);
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _forumDetailWidget(Size size) {
+    return ListView(
+      shrinkWrap: true,
+      children: [
+        SizedBox(height: size.height / 40),
+        Text(
+          '${widget.forum.title}',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
+        ),
+        Container(
+          margin: EdgeInsets.only(top: size.height / 30),
+          height: size.height / 2,
+          child: Image.network(widget.forum.imageURL),
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(vertical: size.height / 50),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Autor: ${widget.forum.author}'),
+              SizedBox(width: size.width / 10),
+              Column(
+                children: [
+                  IconButton(
+                      icon: Icon(Icons.favorite_border), onPressed: () => null),
+                  Text('${widget.forum.reactions}'),
+                ],
+              )
+            ],
+          ),
+        ),
+        ListView.builder(
+          shrinkWrap: true,
+          physics: ClampingScrollPhysics(),
+          itemCount: widget.forum.messages.length,
+          itemBuilder: (contex, index) {
+            var message = widget.forum.messages[index];
+            return Card(
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: size.width / 50,
+                  vertical: size.height / 45,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Autor: ${message.author}'),
+                    SizedBox(height: size.height / 45),
+                    Text(message.message),
+                  ],
+                ),
+              ),
+            );
           },
         ),
-      ),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: size.width / 15),
+          child: InputWidget(labelText: 'Comentar', icon: Icons.forum),
+        )
+      ],
     );
   }
 
@@ -178,4 +248,3 @@ class _ForumDetailState extends State<ForumDetail> {
     );
   }
 }
-

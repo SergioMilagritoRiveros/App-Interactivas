@@ -1,3 +1,5 @@
+import 'package:animapp/views/map.dart';
+import 'package:animapp/widgets/NavDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -14,6 +16,7 @@ class WhatAreYouSearchingFor extends StatefulWidget {
 }
 
 class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
+  bool _isLandscape = false;
   bool _petShop = false;
   bool _peluqueria = false;
   bool _veterinaria = false;
@@ -24,26 +27,37 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
   GoogleMapController _controller;
 
   Widget _submitButton() {
-    return Container(
-      width: MediaQuery.of(context).size.width - 90,
-      padding: EdgeInsets.symmetric(vertical: 10),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.grey.shade200,
-                offset: Offset(2, 4),
-                blurRadius: 4,
-                spreadRadius: 2)
-          ],
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [Color(0xfffbb448), Color(0xfff7892b)])),
-      child: Text(
-        'Buscar',
-        style: TextStyle(fontSize: 20, color: Colors.white),
+    return RaisedButton(
+      elevation: 0,
+      color: Colors.transparent,
+      onPressed: () {
+        if (!_isLandscape)
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MapPage()),
+          );
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width - 90,
+        padding: EdgeInsets.symmetric(vertical: 10),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: Colors.grey.shade200,
+                  offset: Offset(2, 4),
+                  blurRadius: 4,
+                  spreadRadius: 2)
+            ],
+            gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Color(0xfffbb448), Color(0xfff7892b)])),
+        child: Text(
+          'Buscar',
+          style: TextStyle(fontSize: 20, color: Colors.white),
+        ),
       ),
     );
   }
@@ -157,15 +171,26 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
     var size = MediaQuery.of(context).size;
     var height = MediaQuery.of(context).size.height - 10;
     var width = MediaQuery.of(context).size.width;
-    return Scaffold(body: OrientationBuilder(
+    return Scaffold(
+      drawer: NavDrawer(),
+      appBar: AppBar(
+        title: Text('AnimaApp'),
+        backgroundColor: Colors.amber[700],
+      ),
+      backgroundColor: Colors.amberAccent[50],
+      body: OrientationBuilder(
         builder: (BuildContext context, Orientation orientation) {
-      if (Orientation.portrait == orientation) {
-        return formulario(height, width);
-      } else {
-        setMarkers();
-        return formularioHorizontal(size, height);
-      }
-    }));
+          if (Orientation.portrait == orientation) {
+            _isLandscape = false;
+            return formulario(height, width);
+          } else {
+            _isLandscape = true;
+            setMarkers();
+            return formularioHorizontal(size, height);
+          }
+        },
+      ),
+    );
   }
 
   Widget formulario(height, width) {
@@ -206,7 +231,7 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
     return Row(children: [
       Container(
         width: size.width / 3,
-        child: Column(
+        child: ListView(
           children: <Widget>[
             SizedBox(height: MediaQuery.of(context).size.height / 99),
             _listaOpciones(),
