@@ -25,8 +25,8 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
 
   Widget _submitButton() {
     return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 15),
+      width: MediaQuery.of(context).size.width - 90,
+      padding: EdgeInsets.symmetric(vertical: 10),
       alignment: Alignment.center,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -34,7 +34,7 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
             BoxShadow(
                 color: Colors.grey.shade200,
                 offset: Offset(2, 4),
-                blurRadius: 5,
+                blurRadius: 4,
                 spreadRadius: 2)
           ],
           gradient: LinearGradient(
@@ -54,11 +54,11 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
       child: Row(
         children: <Widget>[
           SizedBox(
-            width: 20,
+            width: 10,
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(horizontal: 5),
               child: Divider(
                 thickness: 1,
               ),
@@ -91,7 +91,7 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
           ),
         ),
       ),
-      SizedBox(height: 20),
+      SizedBox(height: 10),
       RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
@@ -155,7 +155,7 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var height = MediaQuery.of(context).size.height;
+    var height = MediaQuery.of(context).size.height - 10;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(body: OrientationBuilder(
         builder: (BuildContext context, Orientation orientation) {
@@ -209,8 +209,6 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
         child: Column(
           children: <Widget>[
             SizedBox(height: MediaQuery.of(context).size.height / 99),
-            _title(),
-            SizedBox(height: .010),
             _listaOpciones(),
             SizedBox(height: .20),
             _submitButton(),
