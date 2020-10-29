@@ -1,4 +1,8 @@
+import 'package:animapp/views/ScheduleForm.dart';
+import 'package:animapp/views/ScheduledAppointment.dart';
+import 'package:animapp/views/placeDetail.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 import '../widgets/InputWidget.dart';
 import '../widgets/NavDrawer.dart';
@@ -15,6 +19,36 @@ class Forum extends StatefulWidget {
 }
 
 class _ForumState extends State<Forum> {
+  ForumModel selectedPost;
+
+  List<Widget> recentsPosts(SizingInformation sizing) {
+    List<Widget> posts = List<Widget>();
+    for (int i = 0; i < forumPost.length; i++) {
+      posts.add(
+        ForumPostCard(
+          post: forumPost[i],
+          onTap: () {
+            setState(() {
+              selectedPost = forumPost[i];
+              if (sizing.isMobile) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => ForumDetail(
+                      title: "animap",
+                      forum: selectedPost,
+                    ),
+                  ),
+                );
+              }
+            });
+          },
+        ),
+      );
+    }
+    return posts;
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -32,44 +66,28 @@ class _ForumState extends State<Forum> {
             InputWidget(labelText: 'Buscar', icon: Icons.search),
             SizedBox(height: size.height / 25),
             Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: forumPost.length,
-                itemBuilder: (context, index) {
-                  var post = forumPost[index];
-                  return RaisedButton(
-                    elevation: 0,
-                    color: Colors.transparent,
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            ForumDetail(title: widget.title, forum: post),
-                      ),
-                    ),
-                    child: Card(
-                      child: Column(
+              child: ResponsiveBuilder(
+                builder: (context, sizing) => Row(
+                  children: [
+                    Expanded(
+                      child: ListView(
+                        scrollDirection: Axis.vertical,
+                        controller: ScrollController(),
+                        physics: AlwaysScrollableScrollPhysics(),
                         children: [
-                          Image.network(post.imageURL, width: size.width),
-                          ListTile(
-                            title: Text(post.title),
-                            subtitle: Text("Autor: ${post.author}"),
-                            trailing: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Icon(Icons.favorite_border),
-                                Text('${post.reactions}'),
-                              ],
-                            ),
-                          ),
+                          ...recentsPosts(sizing),
                         ],
                       ),
-                      elevation: 5.0,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
                     ),
-                  );
-                },
+                    if (selectedPost != null && !sizing.isMobile)
+                      Expanded(
+                        child: ForumDetail(
+                          title: "Animap",
+                          forum: selectedPost,
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -85,6 +103,104 @@ class _ForumState extends State<Forum> {
         ),
         child: Icon(Icons.add, color: Colors.white),
       ),
+    );
+  }
+}
+
+class ForumPostCard extends StatelessWidget {
+  const ForumPostCard({
+    Key key,
+    @required this.post,
+    this.onTap,
+  }) : super(key: key);
+
+  final ForumModel post;
+  final Function onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return ResponsiveBuilder(
+      builder: (context, sizing) {
+        var webCard = Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Container(
+            height: 100,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.transparent,
+            ),
+            child: Material(
+              child: InkWell(
+                borderRadius: BorderRadius.circular(20),
+                onTap: onTap,
+                child: Row(
+                  children: [
+                    Image.network(post.imageURL),
+                    Expanded(
+                      child: ListTile(
+                        title: Text(post.title),
+                        subtitle: Text("Autor: ${post.author}"),
+                        trailing: Padding(
+                          padding: const EdgeInsets.only(right: 20),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Icon(Icons.favorite_border),
+                              Text('${post.reactions}'),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+        var mobileCard = Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Container(
+            height: 400,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.transparent,
+            ),
+            child: Material(
+              child: InkWell(
+                borderRadius: BorderRadius.circular(20),
+                onTap: onTap,
+                child: Column(
+                  children: [
+                    Image.network(post.imageURL),
+                    Expanded(
+                      child: ListTile(
+                        title: Text(post.title),
+                        subtitle: Text("Autor: ${post.author}"),
+                        trailing: Padding(
+                          padding: const EdgeInsets.only(right: 20),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Icon(Icons.favorite_border),
+                              Text('${post.reactions}'),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+        return sizing.isMobile ? mobileCard : webCard;
+      },
     );
   }
 }
