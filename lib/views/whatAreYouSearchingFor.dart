@@ -160,12 +160,7 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
       if (Orientation.portrait == orientation) {
         return formulario(height, size.width);
       } else {
-        return Column(
-          children: [
-            formulario(height, size.width / 3),
-            MapPage(),
-          ],
-        );
+        return formularioHorizontal(size, height);
       }
     }));
   }
@@ -202,5 +197,28 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
         ],
       ),
     );
+  }
+
+  Widget formularioHorizontal(Size size, double height) {
+    return Row(children: [
+      Container(
+        margin: EdgeInsets.symmetric(horizontal: size.width / 30),
+        width: size.width / 3,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(height: height * .02),
+            _title(),
+            SizedBox(height: 20),
+            _listaOpciones(),
+            SizedBox(height: 20),
+            _submitButton(),
+            _divider(),
+            SizedBox(height: height * .045),
+          ],
+        ),
+      )
+    ]);
   }
 }

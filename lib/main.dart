@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: MapPage(title: "Animapp"),
+      home: WhatAreYouSearchingFor(title: "Animapp"),
     );
   }
 }
