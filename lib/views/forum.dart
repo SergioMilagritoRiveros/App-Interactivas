@@ -37,24 +37,36 @@ class _ForumState extends State<Forum> {
                 itemCount: forumPost.length,
                 itemBuilder: (context, index) {
                   var post = forumPost[index];
-                  return ListTile(
-                    onTap: () => Navigator.push(
+                  return RaisedButton(
+                    elevation: 0,
+                    color: Colors.transparent,
+                    onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
                             ForumDetail(title: widget.title, forum: post),
                       ),
                     ),
-                    leading:
-                        Image.network(post.imageURL, width: size.width / 5),
-                    title: Text(post.title),
-                    subtitle: Text("Autor: ${post.author}"),
-                    trailing: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Icon(Icons.favorite_border),
-                        Text('${post.reactions}'),
-                      ],
+                    child: Card(
+                      child: Column(
+                        children: [
+                          Image.network(post.imageURL, width: size.width),
+                          ListTile(
+                            title: Text(post.title),
+                            subtitle: Text("Autor: ${post.author}"),
+                            trailing: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Icon(Icons.favorite_border),
+                                Text('${post.reactions}'),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      elevation: 5.0,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
                     ),
                   );
                 },
