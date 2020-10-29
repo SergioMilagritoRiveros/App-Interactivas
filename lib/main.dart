@@ -21,11 +21,12 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: ResponsiveBuilder(
+      home: WelcomePage(),
+       /* ResponsiveBuilder(
         builder: (context, sizing) {
           return Forum(title: "Animapp");
         },
-      ),
+      ), */
     );
   }
 }

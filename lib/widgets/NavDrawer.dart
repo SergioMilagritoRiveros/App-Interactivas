@@ -1,4 +1,7 @@
+import 'package:animapp/views/ScheduledAppointment.dart';
+import 'package:animapp/views/forum.dart';
 import 'package:animapp/views/welcomePage.dart';
+import 'package:animapp/views/whatAreYouSearchingFor.dart';
 import 'package:flutter/material.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -24,17 +27,23 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.search),
             title: Text('Busqueda'),
-            onTap: () => {},
+            onTap: () => {Navigator.push(context, MaterialPageRoute(
+                        builder: (context) =>
+                            WhatAreYouSearchingFor()))},
           ),
           ListTile(
             leading: Icon(Icons.chat),
             title: Text('Foros'),
-            onTap: () => {},
+            onTap: () => {Navigator.push(context, MaterialPageRoute(
+                        builder: (context) =>
+                            Forum(title: "Animapp")))},
           ),
           ListTile(
             leading: Icon(Icons.settings),
             title: Text('Citas Agendadas'),
-            onTap: () => {},
+            onTap: () => {Navigator.push(context, MaterialPageRoute(
+                        builder: (context) =>
+                            ScheduledAppointment()))},
           ),
           ListTile(
             leading: Icon(Icons.exit_to_app),
