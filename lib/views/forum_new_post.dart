@@ -69,3 +69,4 @@ class _ForumNewPostState extends State<ForumNewPost> {
     );
   }
 }
+
