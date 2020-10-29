@@ -1,6 +1,7 @@
 import 'package:animapp/views/map.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../widgets/InputWidget.dart';
 import '../widgets/bezierContainer.dart';
@@ -21,6 +22,10 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
   bool _peluqueria = false;
   bool _veterinaria = false;
   bool _agendamientoDigital = false;
+
+  BitmapDescriptor pinLocationIcon;
+  Set<Marker> _markers = {};
+  GoogleMapController _controller;
 
   Widget _submitButton() {
     return Container(
@@ -208,7 +213,7 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: height * .02),
+            SizedBox(height: height * .07),
             _title(),
             SizedBox(height: 20),
             _listaOpciones(),
@@ -217,6 +222,18 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
             _divider(),
             SizedBox(height: height * .045),
           ],
+        ),
+      ),
+      Container(
+        height: size.height / .33,
+        child: GoogleMap(
+          markers: _markers,
+          onMapCreated: (GoogleMapController controller) {
+            _controller = controller;
+          },
+          initialCameraPosition: CameraPosition(
+              target: LatLng(4.742877841155348, -74.03123976473584),
+              zoom: 16.0),
         ),
       )
     ]);
