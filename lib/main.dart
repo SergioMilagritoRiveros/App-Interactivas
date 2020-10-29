@@ -1,6 +1,8 @@
+import 'package:animapp/views/map.dart';
 import 'package:animapp/views/forum.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:animapp/views/forum_detail.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: Forum(title: "Animapp"),
+      home: MapPage(title: "Animapp"),
     );
   }
 }

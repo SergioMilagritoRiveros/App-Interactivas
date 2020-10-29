@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
         padding: EdgeInsets.symmetric(vertical: 15),
         alignment: Alignment.center,
         child: FlatButton(
-          minWidth: 400,
+          //minWidth: 400,
           color: Colors.orangeAccent,
           textColor: Colors.white,
           disabledColor: Colors.grey,
