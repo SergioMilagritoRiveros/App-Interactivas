@@ -1,3 +1,4 @@
+import 'package:animapp/views/map.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -152,10 +153,27 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
-        body: Container(
+    return Scaffold(body: OrientationBuilder(
+        builder: (BuildContext context, Orientation orientation) {
+      if (Orientation.portrait == orientation) {
+        return formulario(height, size.width);
+      } else {
+        return Column(
+          children: [
+            formulario(height, size.width / 3),
+            MapPage(),
+          ],
+        );
+      }
+    }));
+  }
+
+  Widget formulario(double height, double width) {
+    return Container(
       height: height,
+      width: width,
       child: Stack(
         children: <Widget>[
           Positioned(
@@ -183,6 +201,6 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
           ),
         ],
       ),
-    ));
+    );
   }
 }

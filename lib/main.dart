@@ -3,6 +3,7 @@ import 'package:animapp/views/forum.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animapp/views/forum_detail.dart';
+import 'package:animapp/views/whatAreYouSearchingFor.dart';
 
 void main() => runApp(MyApp());
 
