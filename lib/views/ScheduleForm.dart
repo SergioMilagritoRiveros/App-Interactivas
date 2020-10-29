@@ -74,7 +74,7 @@ class _ScheduleFormState extends State<ScheduleForm> {
       });
   }
 
-  Widget _schedulingForm() {
+  Widget _schedulingForm(context) {
     return ListView(
       children: <Widget>[
         Text(
@@ -120,7 +120,17 @@ class _ScheduleFormState extends State<ScheduleForm> {
               child: RaisedButton(
                 textColor: Colors.white,
                 color: Colors.green[300],
-                onPressed: () => '',
+                onPressed: () {
+                  var snackBar = SnackBar(
+                    content: Text('Yay! se ha agendado tu cita!'),
+                    action: SnackBarAction(
+                      label: 'Cancelar',
+                      onPressed: () {},
+                    ),
+                  );
+                  // Navigator.pop(context);
+                  Scaffold.of(context).showSnackBar(snackBar);
+                },
                 child: Container(
                   child: new Text("Agendar"),
                   width: MediaQuery.of(context).size.width / 7,
@@ -128,7 +138,7 @@ class _ScheduleFormState extends State<ScheduleForm> {
               ),
             ),
             RaisedButton(
-              onPressed: () => '',
+              onPressed: () => Navigator.pop(context),
               textColor: Colors.white,
               color: Colors.red[300],
               child: Container(
@@ -151,7 +161,7 @@ class _ScheduleFormState extends State<ScheduleForm> {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 10),
-          child: _schedulingForm(),
+          child: _schedulingForm(context),
         ),
       );
     }
@@ -162,11 +172,14 @@ class _ScheduleFormState extends State<ScheduleForm> {
         backgroundColor: Colors.amber[700],
       ),
       backgroundColor: Colors.amberAccent[50],
-      body: Container(
+      body: Builder(
+        builder: (context) => Container(
           padding: EdgeInsets.symmetric(
               horizontal: phoneSize.width / 30,
               vertical: phoneSize.height / 50),
-          child: _schedulingForm()),
+          child: _schedulingForm(context),
+        ),
+      ),
     );
   }
 }
