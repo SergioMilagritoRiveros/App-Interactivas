@@ -237,7 +237,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         _imageLandscape()
                       ]),
                     ]),
-                Column(children: [SizedBox(width: 80)]),
+                SizedBox(width: size.width / 40),
                 Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
