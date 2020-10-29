@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import '../widgets/InputWidget.dart';
 import 'forum_model.dart';
 
@@ -13,6 +14,29 @@ class ForumDetail extends StatefulWidget {
 }
 
 class _ForumDetailState extends State<ForumDetail> {
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return ResponsiveBuilder(
+      builder: (context, sizing) => Scaffold(
+        appBar: sizing.isMobile
+            ? AppBar(
+                title: Text("Animapp"),
+                backgroundColor: Colors.amber[700],
+              )
+            : null,
+        body: ResponsiveBuilder(
+          builder: (context, sizing) {
+            if (sizing.deviceScreenType == DeviceScreenType.mobile) {
+              return _forumDetailBody(size);
+            }
+            return _forumDetailBody(size);
+          },
+        ),
+      ),
+    );
+  }
+
   Widget _forumDetailBody(size) {
     return Column(
       children: [
@@ -72,27 +96,6 @@ class _ForumDetailState extends State<ForumDetail> {
           child: InputWidget(labelText: 'Comentar', icon: Icons.forum),
         )
       ],
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('AnimaApp'),
-        backgroundColor: Colors.amber[700],
-      ),
-      backgroundColor: Colors.amberAccent[50],
-      body: OrientationBuilder(
-        builder: (BuildContext context, Orientation orientation) {
-          if (Orientation.portrait == orientation) {
-            return _forumDetailBody(size);
-          } else {
-            return _forumdetailLandscapeBody(size);
-          }
-        },
-      ),
     );
   }
 
@@ -175,3 +178,4 @@ class _ForumDetailState extends State<ForumDetail> {
     );
   }
 }
+

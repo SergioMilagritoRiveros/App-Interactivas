@@ -15,6 +15,8 @@ class ForumModel {
     @required this.title,
     this.reactions = 0,
   });
+
+  ForumModel fromJSON(string) {}
 }
 
 class ForumMessageModel {
@@ -41,6 +43,51 @@ var forumPost = [
         author: 'Maria',
         message:
             'La verdad, me gusta bañarlo cada semana, el olor a perro lavado me encanta!',
+      ),
+    ],
+  ),
+  ForumModel(
+    title: '¿Cómo puedo cuidar adecuadamente un gato?',
+    author: 'Juan',
+    reactions: 125,
+    messages: [
+      ForumMessageModel(
+        author: 'Arnoldo',
+        message: 'asdasdasda sd',
+      ),
+      ForumMessageModel(
+        author: 'Maria',
+        message: 'asdasdasd',
+      ),
+    ],
+  ),
+  ForumModel(
+    title: '¿Cómo puedo cuidar adecuadamente un gato?',
+    author: 'Juan',
+    reactions: 125,
+    messages: [
+      ForumMessageModel(
+        author: 'Arnoldo',
+        message: 'asdasdasda sd',
+      ),
+      ForumMessageModel(
+        author: 'Maria',
+        message: 'asdasdasd',
+      ),
+    ],
+  ),
+  ForumModel(
+    title: '¿Cómo puedo cuidar adecuadamente un gato?',
+    author: 'Juan',
+    reactions: 125,
+    messages: [
+      ForumMessageModel(
+        author: 'Arnoldo',
+        message: 'asdasdasda sd',
+      ),
+      ForumMessageModel(
+        author: 'Maria',
+        message: 'asdasdasd',
       ),
     ],
   ),
