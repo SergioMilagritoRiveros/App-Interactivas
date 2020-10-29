@@ -19,6 +19,7 @@ dependencies:
   dio: ^1.0.13
   google_fonts: ^0.3.5
   google_maps_flutter: ^0.5.27+3
+  responsive_builder: ^0.3.0
 
 dev_dependencies:
   flutter_test:
