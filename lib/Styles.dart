@@ -27,3 +27,25 @@ var fondoOscuro = BoxDecoration(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [Colors.grey, Colors.grey[850]]));
+
+var manchaNormal = BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Color(0xfffbb448), Color(0xffe46b10)]));
+
+var manchaOscura = BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Colors.lightBlue, Colors.blue[900]]));
+
+var botonNormal = LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Color(0xfffbb448), Color(0xfff7892b)]);
+
+var botonOscuro = LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Colors.blue, Colors.lightBlue]);

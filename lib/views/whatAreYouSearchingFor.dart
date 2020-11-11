@@ -1,9 +1,11 @@
+import 'package:animapp/blocs/darkThemeProvider.dart';
 import 'package:animapp/views/map.dart';
 import 'package:animapp/widgets/NavDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:animapp/views/placeDetail.dart';
+import '../Styles.dart';
 import '../widgets/bezierContainer.dart';
 
 class WhatAreYouSearchingFor extends StatefulWidget {
@@ -16,6 +18,7 @@ class WhatAreYouSearchingFor extends StatefulWidget {
 }
 
 class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
+  DarkThemeProvider darkTheme = new DarkThemeProvider();
   bool _isLandscape = false;
   bool _petShop = false;
   bool _peluqueria = false;
@@ -45,15 +48,12 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
             borderRadius: BorderRadius.all(Radius.circular(5)),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                  color: Colors.grey.shade200,
+                  color: darkTheme.darkTheme ? Colors.lightBlue : Color(0xffdf8e33).withAlpha(100),
                   offset: Offset(2, 4),
                   blurRadius: 4,
                   spreadRadius: 2)
             ],
-            gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [Color(0xfffbb448), Color(0xfff7892b)])),
+            gradient: darkTheme.darkTheme ? botonOscuro : botonNormal),
         child: Text(
           'Buscar',
           style: TextStyle(fontSize: 20, color: Colors.white),
@@ -101,7 +101,7 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
             textStyle: Theme.of(context).textTheme.display1,
             fontSize: 30,
             fontWeight: FontWeight.w700,
-            color: Color(0xffe46b10),
+            color: darkTheme.darkTheme ? Colors.blue : Color(0xffe46b10),
           ),
         ),
       ),
@@ -175,7 +175,7 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
       drawer: NavDrawer(),
       appBar: AppBar(
         title: Text('AnimaApp'),
-        backgroundColor: Colors.amber[700],
+        backgroundColor: darkTheme.darkTheme ? Colors.blue : Color(0xffe46b10),
       ),
       backgroundColor: Colors.amberAccent[50],
       body: OrientationBuilder(

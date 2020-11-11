@@ -1,3 +1,4 @@
+import 'package:animapp/blocs/darkThemeProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +18,20 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   Size size;
+  DarkThemeProvider darkTheme = new DarkThemeProvider();
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentAppTheme();
+  }
+
+  void getCurrentAppTheme() async {
+    darkTheme.darkTheme =
+        await darkTheme.darkThemePreference.getTheme()
+        ;
+  }
+
   Widget _submitButtonPortrait() {
     return InkWell(
       onTap: () {
@@ -31,15 +46,15 @@ class _WelcomePageState extends State<WelcomePage> {
             borderRadius: BorderRadius.all(Radius.circular(5)),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                  color: Color(0xffdf8e33).withAlpha(100),
+                  color: darkTheme.darkTheme ? Colors.lightBlue : Color(0xffdf8e33).withAlpha(100),
                   offset: Offset(2, 4),
                   blurRadius: 8,
                   spreadRadius: 2)
             ],
-            color: Colors.white),
+            color: darkTheme.darkTheme ? Colors.blue : Colors.white),
         child: Text(
           'Ingresar',
-          style: TextStyle(fontSize: 20, color: Color(0xfff7892b)),
+          style: TextStyle(fontSize: 20, color: darkTheme.darkTheme ? Colors.white : Colors.black),
         ),
       ),
     );
@@ -59,15 +74,15 @@ class _WelcomePageState extends State<WelcomePage> {
             borderRadius: BorderRadius.all(Radius.circular(5)),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                  color: Color(0xffdf8e33).withAlpha(100),
+                  color: darkTheme.darkTheme ? Colors.lightBlue : Color(0xffdf8e33).withAlpha(100),
                   offset: Offset(2, 4),
                   blurRadius: 8,
                   spreadRadius: 2)
             ],
-            color: Colors.white),
+            color: darkTheme.darkTheme ? Colors.black : Color(0xfff7892b)),
         child: Text(
           'Ingresar',
-          style: TextStyle(fontSize: 20, color: Color(0xfff7892b)),
+          style: TextStyle(fontSize: 20, color: darkTheme.darkTheme ? Colors.black : Colors.white),
         ),
       ),
     );
@@ -126,7 +141,7 @@ class _WelcomePageState extends State<WelcomePage> {
           textStyle: Theme.of(context).textTheme.headline4,
           fontSize: size.width / 8,
           fontWeight: FontWeight.w700,
-          color: Colors.white,
+          color: darkTheme.darkTheme ? Colors.blue : Colors.white,
         ),
       ),
     );
@@ -158,7 +173,10 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
-    return Scaffold(body: _layoutDetails());
+    return ChangeNotifierProvider(
+        create: (_) {
+          return darkTheme;
+        }, child:Scaffold(body: _layoutDetails()));
   }
 
   Widget _layoutDetails() {
@@ -169,7 +187,7 @@ class _WelcomePageState extends State<WelcomePage> {
           child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20),
         height: MediaQuery.of(context).size.height,
-        decoration: isDarkTheme ? fondoOscuro : fondoNormal,
+        decoration: darkTheme.darkTheme ? fondoOscuro : fondoNormal,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -194,7 +212,7 @@ class _WelcomePageState extends State<WelcomePage> {
       return Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           height: MediaQuery.of(context).size.height,
-          decoration: fondoNormal,
+          decoration: darkTheme.darkTheme ? fondoOscuro : fondoNormal,
           child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,

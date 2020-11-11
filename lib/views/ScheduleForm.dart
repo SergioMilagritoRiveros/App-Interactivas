@@ -1,3 +1,4 @@
+import 'package:animapp/blocs/darkThemeProvider.dart';
 import 'package:animapp/widgets/InputWidget.dart';
 import 'package:animapp/widgets/NavDrawer.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class ScheduleForm extends StatefulWidget {
 
 class _ScheduleFormState extends State<ScheduleForm> {
   String dropdownValue = 'Perro';
-
+  DarkThemeProvider darkTheme = new DarkThemeProvider();
   TextEditingController _controller = TextEditingController();
   TextEditingController _controllerTime = TextEditingController();
   DateTime _dateTime = DateTime.now();
@@ -169,7 +170,7 @@ class _ScheduleFormState extends State<ScheduleForm> {
       drawer: NavDrawer(),
       appBar: AppBar(
         title: Text('AnimaApp'),
-        backgroundColor: Colors.amber[700],
+        backgroundColor: darkTheme.darkTheme ? Colors.blue : Color(0xffe46b10),
       ),
       backgroundColor: Colors.amberAccent[50],
       body: Builder(

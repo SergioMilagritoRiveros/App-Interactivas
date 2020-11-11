@@ -1,3 +1,4 @@
+import 'package:animapp/blocs/darkThemeProvider.dart';
 import 'package:animapp/widgets/NavDrawer.dart';
 import 'package:flutter/material.dart';
 
@@ -9,13 +10,14 @@ class ScheduledAppointment extends StatefulWidget {
 }
 
 class _ScheduledAppointmentState extends State<ScheduledAppointment> {
+  DarkThemeProvider darkTheme = new DarkThemeProvider();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavDrawer(),
       appBar: AppBar(
         title: Text('AnimaApp'),
-        backgroundColor: Colors.amber[700],
+        backgroundColor: darkTheme.darkTheme ? Colors.blue : Color(0xffe46b10),
       ),
       backgroundColor: Colors.amberAccent[50],
       body: OrientationBuilder(

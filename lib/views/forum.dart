@@ -1,3 +1,4 @@
+import 'package:animapp/blocs/darkThemeProvider.dart';
 import 'package:animapp/views/forum_detail.dart';
 import 'package:animapp/views/forum_model.dart';
 import 'package:animapp/views/forum_new_post.dart';
@@ -14,6 +15,7 @@ class Forum extends StatefulWidget {
 }
 
 class _ForumState extends State<Forum> {
+  DarkThemeProvider darkTheme = new DarkThemeProvider();
   ForumModel _selected;
   Widget _landscape(Size size) {
     return Row(
@@ -143,7 +145,7 @@ class _ForumState extends State<Forum> {
       drawer: NavDrawer(),
       appBar: AppBar(
         title: Text('AnimaApp'),
-        backgroundColor: Colors.amber[700],
+        backgroundColor: darkTheme.darkTheme ? Colors.blue : Color(0xffe46b10),
       ),
       backgroundColor: Colors.amberAccent[50],
       body: OrientationBuilder(

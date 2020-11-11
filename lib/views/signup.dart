@@ -1,5 +1,7 @@
+import 'package:animapp/blocs/darkThemeProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../Styles.dart';
 
 import '../widgets/InputWidget.dart';
 import '../widgets/bezierContainer.dart';
@@ -15,6 +17,8 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  
+  DarkThemeProvider darkTheme = new DarkThemeProvider();
   Widget _backButton() {
     return InkWell(
       onTap: () {
@@ -56,15 +60,12 @@ class _SignUpPageState extends State<SignUpPage> {
             borderRadius: BorderRadius.all(Radius.circular(5)),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                  color: Colors.grey.shade200,
+                  color: darkTheme.darkTheme ? Colors.lightBlue : Color(0xffdf8e33).withAlpha(100), 
                   offset: Offset(2, 4),
                   blurRadius: 5,
                   spreadRadius: 2)
             ],
-            gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [Color(0xfffbb448), Color(0xfff7892b)])),
+            gradient: darkTheme.darkTheme ? botonOscuro : botonNormal),
         child: Text(
           'Registrarse',
           style: TextStyle(fontSize: 20, color: Colors.white),
@@ -96,7 +97,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Text(
               'Ingresa',
               style: TextStyle(
-                  color: Color(0xfff79c4f),
+                  color: darkTheme.darkTheme ? Colors.white : Color(0xfff79c4f),
                   fontSize: 13,
                   fontWeight: FontWeight.w600),
             ),
@@ -115,7 +116,7 @@ class _SignUpPageState extends State<SignUpPage> {
           textStyle: Theme.of(context).textTheme.display1,
           fontSize: 30,
           fontWeight: FontWeight.w700,
-          color: Color(0xffe46b10),
+          color: darkTheme.darkTheme ? Colors.blue : Color(0xffe46b10),
         ),
       ),
     );
