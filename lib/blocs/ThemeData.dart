@@ -3,32 +3,27 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
- class Styles {
+class Styles {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    print("si estoy entrando");
+    print("$isDarkTheme");
     return ThemeData(
-      primarySwatch: Colors.amber,
-      textTheme: GoogleFonts.latoTextTheme(textTheme).copyWith(
+      primarySwatch: Colors.amber, //esto ya esta
+      /* textTheme: GoogleFonts.latoTextTheme(textTheme).copyWith(
         bodyText1: GoogleFonts.montserrat(textStyle: textTheme.bodyText1),
-        ),
-      primaryColor: isDarkTheme ? Colors.grey : Colors.white,
-
-      backgroundColor: isDarkTheme ? Colors.grey[600] : Color(0xffF1F5FB),
-
-      indicatorColor: isDarkTheme ? Color(0xff0E1D36) : Color(0xffCBDCF8),
-      buttonColor: isDarkTheme ? Color(0xff3B3B3B) : Color(0xffF1F5FB),
-
-      hintColor: isDarkTheme ? Color(0xff280C0B) : Color(0xffEECED3),
-
-      highlightColor: isDarkTheme ? Color(0xff372901) : Color(0xffFCE192),
-      hoverColor: isDarkTheme ? Color(0xff3A3A3B) : Color(0xff4285F4),
-
-      focusColor: isDarkTheme ? Color(0xff0B2512) : Color(0xffA8DAB5),
+      ), */
+      primaryColor: isDarkTheme ? Colors.grey[700] : Colors.white, //ya esta
+      backgroundColor: isDarkTheme ? Colors.grey[600] : Color(0xffF1F5FB), //ya esta
+      indicatorColor: isDarkTheme ? Color(0xff0E1D36) : Color(0xffCBDCF8), //pendiente
+      scaffoldBackgroundColor: isDarkTheme ? Color(0xff120035) : Colors.white,
+      cursorColor: isDarkTheme ? Colors.white : Colors.black,
+      hintColor: isDarkTheme ? Colors.white : Colors.black,
       disabledColor: Colors.grey,
       textSelectionColor: isDarkTheme ? Colors.white : Colors.black,
-      cardColor: isDarkTheme ? Color(0xFF151515) : Colors.white,
-      canvasColor: isDarkTheme ? Colors.black : Colors.grey[50],
-      brightness: isDarkTheme ? Brightness.dark : Brightness.light,
+      textSelectionHandleColor: isDarkTheme ? Colors.white : Colors.black,
+      cardColor: isDarkTheme ? Color(0xFF9c9a9a) : Colors.white,
+      //brightness: isDarkTheme ? Brightness.dark : Brightness.light,
       buttonTheme: Theme.of(context).buttonTheme.copyWith(
           colorScheme: isDarkTheme ? ColorScheme.dark() : ColorScheme.light()),
       appBarTheme: AppBarTheme(

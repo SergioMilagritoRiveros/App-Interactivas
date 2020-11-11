@@ -42,7 +42,6 @@ class InputWidget extends StatelessWidget {
       icon: _icon,
       labelText: labelText,
       hintText: hintText,
-      fillColor: Colors.pink
     );
   }
 String validatorDefault(String value) => value.isEmpty ? validateText : null;

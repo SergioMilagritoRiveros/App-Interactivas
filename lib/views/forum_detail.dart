@@ -116,6 +116,9 @@ class _ForumDetailState extends State<ForumDetail> {
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
+        SizedBox(
+          height: size.height / 40,
+        ),
         Container(
           height: size.height / 5,
           child: Image.network(widget.forum.imageURL),
