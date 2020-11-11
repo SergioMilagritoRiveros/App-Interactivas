@@ -11,6 +11,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  shared_preferences:
+  provider:
+  custom_switch:
+  lite_rolling_switch:
 
 
   cupertino_icons: ^0.1.3
