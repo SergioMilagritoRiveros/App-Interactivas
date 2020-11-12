@@ -46,7 +46,7 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
           height: size.height / 4,
           child: new FittedBox(
             child: Material(
-              color: Colors.white,
+              color: Colors.transparent,
               elevation: 14.0,
               borderRadius: BorderRadius.circular(24.0),
               shadowColor: Color(0x802196F3),
@@ -148,6 +148,11 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
   }
 
   Widget _buildPortrait(Size size) {
+    Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.0)),
+      elevation: 14.0,
+      shadowColor: Color(0x802196F3),
+    );
     return ListView(
       scrollDirection: Axis.vertical,
       children: <Widget>[
@@ -161,10 +166,10 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
           margin: EdgeInsets.symmetric(
               horizontal: size.width / 45, vertical: size.height / 50),
           child: new FittedBox(
-            child: Material(
-              color: Colors.white,
+            child: Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24.0)),
               elevation: 14.0,
-              borderRadius: BorderRadius.circular(24.0),
               shadowColor: Color(0x802196F3),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -182,7 +187,7 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
                       child: Image(
                         fit: BoxFit.contain,
                         alignment: Alignment.topRight,
-                        image: AssetImage('images/image-card.jpg'),
+                        image: AssetImage('images/image-card.png'),
                       ),
                     ),
                   ),
@@ -195,10 +200,10 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
           margin: EdgeInsets.symmetric(
               horizontal: size.width / 45, vertical: size.height / 50),
           child: new FittedBox(
-            child: Material(
-              color: Colors.white,
+            child: Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24.0)),
               elevation: 14.0,
-              borderRadius: BorderRadius.circular(24.0),
               shadowColor: Color(0x802196F3),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -216,7 +221,7 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
                       child: Image(
                         fit: BoxFit.contain,
                         alignment: Alignment.topRight,
-                        image: AssetImage('images/image-card.jpg'),
+                        image: AssetImage('images/image-card.png'),
                       ),
                     ),
                   ),
@@ -229,10 +234,10 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
           margin: EdgeInsets.symmetric(
               horizontal: size.width / 45, vertical: size.height / 50),
           child: new FittedBox(
-            child: Material(
-              color: Colors.white,
+            child: Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24.0)),
               elevation: 14.0,
-              borderRadius: BorderRadius.circular(24.0),
               shadowColor: Color(0x802196F3),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -250,7 +255,7 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
                       child: Image(
                         fit: BoxFit.contain,
                         alignment: Alignment.topRight,
-                        image: AssetImage('images/image-card.jpg'),
+                        image: AssetImage('images/image-card.png'),
                       ),
                     ),
                   ),
@@ -273,8 +278,8 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
               child: Text(
             "Baño",
             style: TextStyle(
-                color: Color(0xffe6020a),
                 fontSize: 30.0,
+                color: Colors.amber[600],
                 fontWeight: FontWeight.bold),
           )),
         ),
@@ -283,10 +288,7 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
           child: Container(
               child: Text(
             "Veterinaria Dog Pet \u00B7 20/09/2020  11:40 am",
-            style: TextStyle(
-                color: Colors.black54,
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
           )),
         ),
         Padding(
@@ -294,10 +296,7 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
           child: Container(
               child: Text(
             "Cra. 78 #4-06, Bogotá, Cundinamarca",
-            style: TextStyle(
-                color: Colors.black54,
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
           )),
         )
       ],
@@ -314,7 +313,7 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
               child: Text(
             "Consulta Veterinario",
             style: TextStyle(
-                color: Color(0xffe6020a),
+                color: Colors.amber[600],
                 fontSize: 30.0,
                 fontWeight: FontWeight.bold),
           )),
@@ -324,10 +323,7 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
           child: Container(
               child: Text(
             "Veterinaria perro feliz \u00B7 23/09/2020  9:00 am",
-            style: TextStyle(
-                color: Colors.black54,
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
           )),
         ),
         Padding(
@@ -335,10 +331,7 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
           child: Container(
               child: Text(
             "Ciudad De Cali #36-21, Kennedy, Bogotá",
-            style: TextStyle(
-                color: Colors.black54,
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
           )),
         )
       ],
@@ -355,7 +348,7 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
               child: Text(
             "Consulta Veterinario",
             style: TextStyle(
-                color: Color(0xffe6020a),
+                color: Colors.amber[600],
                 fontSize: 30.0,
                 fontWeight: FontWeight.bold),
           )),
@@ -365,10 +358,7 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
           child: Container(
               child: Text(
             "Veterinaria Doblesse \u00B7 30/09/2020  01:30 pm",
-            style: TextStyle(
-                color: Colors.black54,
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
           )),
         ),
         Padding(
@@ -376,10 +366,7 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
           child: Container(
               child: Text(
             " Cra. 21 #1, Antonio Nariño, Bogotá",
-            style: TextStyle(
-                color: Colors.black54,
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
           )),
         )
       ],

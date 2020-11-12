@@ -37,7 +37,7 @@ class InputWidget extends StatelessWidget {
   }) : super(key: key);
 
   InputDecoration _inputDecoration() {
-    var _icon = icon != null ? Icon(icon) : null;
+    var _icon = icon != null ? Icon(icon, color: Colors.grey) : null;
     return InputDecoration(
       icon: _icon,
       labelText: labelText,
