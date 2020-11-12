@@ -1,3 +1,4 @@
+import 'package:animapp/views/home.dart';
 import 'package:animapp/views/whatAreYouSearchingFor.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -43,10 +44,11 @@ class _LoginPageState extends State<LoginPage> {
       elevation: 0,
       color: Colors.transparent,
       onPressed: () {
+        Navigator.pop(context);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => WhatAreYouSearchingFor(),
+            builder: (context) => Home(),
           ),
         );
       },
