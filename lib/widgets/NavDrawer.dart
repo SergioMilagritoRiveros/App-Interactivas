@@ -31,8 +31,8 @@ class NavDrawer extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 50),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 80),
             child: LiteRollingSwitch(
               value: !themeChange.darkTheme,
               textOn: "Ligth",

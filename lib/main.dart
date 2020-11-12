@@ -1,3 +1,4 @@
+import 'package:animapp/global.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +37,7 @@ class _MyAppState extends State<MyApp> {
         },
         child: Consumer<DarkThemeProvider>(
           builder: (BuildContext context, value, Widget child) {
+            isDarkMode = themeChangeProvider.darkTheme;
             return MaterialApp(
               title: 'Animapp',
               debugShowCheckedModeBanner: false,

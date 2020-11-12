@@ -29,7 +29,7 @@ class _ScheduleFormState extends State<ScheduleForm> {
         return InputDecorator(
           decoration: InputDecoration(
             labelText: 'Seleccione su tipo de mascota',
-            icon: Icon(Icons.pets),
+            icon: Icon(Icons.pets, color: Colors.grey),
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
@@ -67,6 +67,7 @@ class _ScheduleFormState extends State<ScheduleForm> {
   }
 
   _pickTime() async {
+    FocusScope.of(context).requestFocus(new FocusNode());
     TimeOfDay t = await showTimePicker(context: context, initialTime: time);
     if (t != null)
       setState(() {
@@ -92,7 +93,7 @@ class _ScheduleFormState extends State<ScheduleForm> {
           decoration: InputDecoration(
             enabled: true,
             labelText: 'Fecha de la cita',
-            icon: Icon(Icons.today),
+            icon: Icon(Icons.today, color: Colors.grey),
           ),
         ),
         SizedBox(height: 30),
@@ -102,7 +103,7 @@ class _ScheduleFormState extends State<ScheduleForm> {
           decoration: InputDecoration(
             enabled: true,
             labelText: 'Hora de la cita',
-            icon: Icon(Icons.access_time),
+            icon: Icon(Icons.access_time, color: Colors.grey),
           ),
         ),
         SizedBox(height: 30),
@@ -167,7 +168,6 @@ class _ScheduleFormState extends State<ScheduleForm> {
       );
     }
     return Scaffold(
-      drawer: NavDrawer(),
       appBar: AppBar(
         title: Text('AnimaApp'),
         backgroundColor: darkTheme.darkTheme ? Colors.blue : Color(0xffe46b10),

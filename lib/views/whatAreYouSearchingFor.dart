@@ -1,11 +1,15 @@
 import 'package:animapp/blocs/darkThemeProvider.dart';
+import 'package:animapp/global.dart';
 import 'package:animapp/views/map.dart';
+import 'package:animapp/views/welcomePage.dart';
 import 'package:animapp/widgets/NavDrawer.dart';
+import 'package:animapp/widgets/showMenu.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:animapp/views/placeDetail.dart';
 import '../Styles.dart';
+import 'package:provider/provider.dart';
 import '../widgets/bezierContainer.dart';
 
 class WhatAreYouSearchingFor extends StatefulWidget {
@@ -114,7 +118,6 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
             textStyle: Theme.of(context).textTheme.display1,
             fontSize: 20,
             fontWeight: FontWeight.w700,
-            color: Colors.black,
           ),
         ),
       )
@@ -172,10 +175,15 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
     var height = MediaQuery.of(context).size.height - 10;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      drawer: NavDrawer(),
       appBar: AppBar(
         title: Text('AnimaApp'),
         backgroundColor: darkTheme.darkTheme ? Colors.blue : Color(0xffe46b10),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.more_vert),
+            onPressed: () => showPopupMenu(context),
+          )
+        ],
       ),
       backgroundColor: Colors.amberAccent[50],
       body: OrientationBuilder(

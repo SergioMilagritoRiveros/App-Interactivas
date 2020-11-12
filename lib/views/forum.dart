@@ -3,12 +3,12 @@ import 'package:animapp/views/forum_detail.dart';
 import 'package:animapp/views/forum_model.dart';
 import 'package:animapp/views/forum_new_post.dart';
 import 'package:animapp/widgets/InputWidget.dart';
-import 'package:animapp/widgets/NavDrawer.dart';
+import 'package:animapp/widgets/showMenu.dart';
 import 'package:flutter/material.dart';
 
 class Forum extends StatefulWidget {
   final String title;
-  Forum({Key key, @required this.title}) : super(key: key);
+  Forum({Key key, this.title}) : super(key: key);
 
   @override
   _ForumState createState() => _ForumState();
@@ -142,10 +142,15 @@ class _ForumState extends State<Forum> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      drawer: NavDrawer(),
       appBar: AppBar(
         title: Text('AnimaApp'),
         backgroundColor: darkTheme.darkTheme ? Colors.blue : Color(0xffe46b10),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.more_vert),
+            onPressed: () => showPopupMenu(context),
+          )
+        ],
       ),
       backgroundColor: Colors.amberAccent[50],
       body: OrientationBuilder(
@@ -157,7 +162,7 @@ class _ForumState extends State<Forum> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.amber[700],
+          backgroundColor: darkTheme.darkTheme ? Colors.blue : Colors.amber[700],
           onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(

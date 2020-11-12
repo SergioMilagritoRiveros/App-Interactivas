@@ -1,4 +1,5 @@
 import 'package:animapp/blocs/darkThemeProvider.dart';
+import 'package:animapp/views/home.dart';
 import 'package:animapp/views/whatAreYouSearchingFor.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             Container(
               padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
+              child: Icon(Icons.keyboard_arrow_left),
             ),
             Text('Atrás',
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
@@ -47,10 +48,11 @@ class _LoginPageState extends State<LoginPage> {
       elevation: 0,
       color: Colors.transparent,
       onPressed: () {
+        Navigator.pop(context);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => WhatAreYouSearchingFor(),
+            builder: (context) => Home(),
           ),
         );
       },
