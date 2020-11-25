@@ -13,10 +13,10 @@ class SignUpPage extends StatefulWidget {
   final String title;
 
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  SignUpPageState createState() => SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class SignUpPageState extends State<SignUpPage> {
   
   DarkThemeProvider darkTheme = new DarkThemeProvider();
   Widget _backButton() {
@@ -40,7 +40,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _submitButton() {
+  Widget submitButton() {
     return RaisedButton(
       elevation: 0,
       color: Colors.transparent,
@@ -74,7 +74,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _loginAccountLabel() {
+  Widget loginAccountLabel() {
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -107,7 +107,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _title() {
+  Widget title() {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
@@ -122,7 +122,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _emailPasswordWidget() {
+  Widget emailPasswordWidget() {
     return Column(
       children: <Widget>[
         InputWidget(
@@ -164,17 +164,17 @@ class _SignUpPageState extends State<SignUpPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(height: height * .2),
-                    _title(),
+                    title(),
                     SizedBox(
                       height: 50,
                     ),
-                    _emailPasswordWidget(),
+                    emailPasswordWidget(),
                     SizedBox(
                       height: 20,
                     ),
-                    _submitButton(),
+                    submitButton(),
                     SizedBox(height: height * .14),
-                    _loginAccountLabel(),
+                    loginAccountLabel(),
                   ],
                 ),
               ),

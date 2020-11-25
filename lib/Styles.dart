@@ -23,10 +23,8 @@ var fondoOscuro = BoxDecoration(
                   blurRadius: 5,
                   spreadRadius: 2)
             ],
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Colors.grey, Colors.grey[850]]));
+            color: Colors.grey[800],
+          );
 
 var manchaNormal = BoxDecoration(
               gradient: LinearGradient(

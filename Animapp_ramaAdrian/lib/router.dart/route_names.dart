@@ -1,9 +1,0 @@
-const String WelcomePageRoute = '/';
-const String HomeRoute = '/home';
-const String InicioRoute = '/inicio';
-const String LoginRoute = '/login';
-const String RegisterRoute = '/register';
-const String MapPageRoute = '/map';
-const String NewForumRoute = '/newforum';
-const String ForumsRoute = '/forums';
-const String ScheduledAppointmentRoute = '/citas';

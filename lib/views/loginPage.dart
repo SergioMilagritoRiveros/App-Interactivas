@@ -16,10 +16,10 @@ class LoginPage extends StatefulWidget {
   final String title;
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  LoginPageState createState() => LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class LoginPageState extends State<LoginPage> {
   DarkThemeProvider darkTheme = new DarkThemeProvider();
   
   Widget _backButton() {
@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _submitButton() {
+  Widget submitButton() {
     return RaisedButton(
       elevation: 0,
       color: Colors.transparent,
@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _divider() {
+  Widget divider() {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Row(
@@ -107,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _createAccountLabel() {
+  Widget createAccountLabel() {
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -140,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _title() {
+  Widget title() {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
@@ -155,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _emailPasswordWidget() {
+  Widget emailPasswordWidget() {
     return Column(
       children: <Widget>[
         InputWidget(
@@ -192,11 +192,11 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(height: height * .2),
-                  _title(),
+                  title(),
                   SizedBox(height: 50),
-                  _emailPasswordWidget(),
+                  emailPasswordWidget(),
                   SizedBox(height: 20),
-                  _submitButton(),
+                  submitButton(),
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 10),
                     alignment: Alignment.centerRight,
@@ -210,9 +210,9 @@ class _LoginPageState extends State<LoginPage> {
                                   builder: (context) => ForgottenPassword()));
                         }),
                   ),
-                  _divider(),
+                  divider(),
                   SizedBox(height: height * .055),
-                  _createAccountLabel(),
+                  createAccountLabel(),
                 ],
               ),
             ),

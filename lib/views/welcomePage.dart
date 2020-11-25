@@ -1,4 +1,6 @@
 import 'package:animapp/blocs/darkThemeProvider.dart';
+import 'package:animapp/views/home.dart';
+import 'package:animapp/widgets/InputWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -17,8 +19,26 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
+  var _tapLogin = false;
+  var _tapSignUp = false;
   Size size;
+  LoginPageState formulariosLogin = new LoginPageState();
+  SignUpPageState formulariosSignUp = new SignUpPageState();
   DarkThemeProvider darkTheme = new DarkThemeProvider();
+
+  changePositionLogin() {
+    setState(() {
+      _tapLogin = true;
+      _tapSignUp = false;
+    });
+  }
+
+  changePositionSignUp() {
+    setState(() {
+      _tapSignUp = true;
+      _tapLogin = false;
+    });
+  }
 
   @override
   void initState() {
@@ -27,9 +47,7 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
   void getCurrentAppTheme() async {
-    darkTheme.darkTheme =
-        await darkTheme.darkThemePreference.getTheme()
-        ;
+    darkTheme.darkTheme = await darkTheme.darkThemePreference.getTheme();
   }
 
   Widget _submitButtonPortrait() {
@@ -46,7 +64,9 @@ class _WelcomePageState extends State<WelcomePage> {
             borderRadius: BorderRadius.all(Radius.circular(5)),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                  color: darkTheme.darkTheme ? Colors.lightBlue : Color(0xffdf8e33).withAlpha(100),
+                  color: darkTheme.darkTheme
+                      ? Colors.lightBlue
+                      : Color(0xffdf8e33).withAlpha(100),
                   offset: Offset(2, 4),
                   blurRadius: 8,
                   spreadRadius: 2)
@@ -54,7 +74,9 @@ class _WelcomePageState extends State<WelcomePage> {
             color: darkTheme.darkTheme ? Colors.blue : Colors.white),
         child: Text(
           'Ingresar',
-          style: TextStyle(fontSize: 20, color: darkTheme.darkTheme ? Colors.white : Colors.black),
+          style: TextStyle(
+              fontSize: 20,
+              color: darkTheme.darkTheme ? Colors.white : Colors.black),
         ),
       ),
     );
@@ -63,8 +85,7 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget _submitButtonLandscape() {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
+        changePositionLogin();
       },
       child: Container(
         width: size.width / 2,
@@ -74,15 +95,19 @@ class _WelcomePageState extends State<WelcomePage> {
             borderRadius: BorderRadius.all(Radius.circular(5)),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                  color: darkTheme.darkTheme ? Colors.lightBlue : Color(0xffdf8e33).withAlpha(100),
+                  color: darkTheme.darkTheme
+                      ? Colors.lightBlue
+                      : Color(0xffdf8e33).withAlpha(100),
                   offset: Offset(2, 4),
                   blurRadius: 8,
                   spreadRadius: 2)
             ],
-            color: darkTheme.darkTheme ? Colors.black : Color(0xfff7892b)),
+            color: darkTheme.darkTheme ? Colors.blue : Colors.white),
         child: Text(
           'Ingresar',
-          style: TextStyle(fontSize: 20, color: darkTheme.darkTheme ? Colors.black : Colors.white),
+          style: TextStyle(
+              fontSize: 20,
+              color: darkTheme.darkTheme ? Colors.white : Colors.black),
         ),
       ),
     );
@@ -113,8 +138,7 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget _signUpButtonLandscape() {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SignUpPage()));
+        changePositionSignUp();
       },
       child: Container(
         width: size.width / 2,
@@ -156,7 +180,7 @@ class _WelcomePageState extends State<WelcomePage> {
           textStyle: Theme.of(context).textTheme.headline4,
           fontSize: size.width / 10,
           fontWeight: FontWeight.w700,
-          color: Colors.white,
+          color: darkTheme.darkTheme ? Colors.blue : Colors.white,
         ),
       ),
     );
@@ -176,7 +200,8 @@ class _WelcomePageState extends State<WelcomePage> {
     return ChangeNotifierProvider(
         create: (_) {
           return darkTheme;
-        }, child:Scaffold(body: _layoutDetails()));
+        },
+        child: Scaffold(body: _layoutDetails()));
   }
 
   Widget _layoutDetails() {
@@ -208,7 +233,9 @@ class _WelcomePageState extends State<WelcomePage> {
           ],
         ),
       ));
-    } else {
+    } else if (orientation == Orientation.landscape &&
+        !_tapLogin &&
+        !_tapSignUp) {
       return Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           height: MediaQuery.of(context).size.height,
@@ -245,6 +272,166 @@ class _WelcomePageState extends State<WelcomePage> {
                       ),
                       _signUpButtonLandscape(),
                     ]),
+              ]));
+    } else if (orientation == Orientation.landscape &&
+        _tapLogin &&
+        !_tapSignUp) {
+      return Container(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          height: MediaQuery.of(context).size.height,
+          decoration: darkTheme.darkTheme ? fondoOscuro : fondoNormal,
+          child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                    flex: 2,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _submitButtonLandscape(),
+                          SizedBox(
+                            height: size.width / 15,
+                          ),
+                          _signUpButtonLandscape(),
+                        ])),
+                Expanded(
+                    flex: 6,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: size.height / 5,
+                            width: size.width / 1.5,
+                            child: formulariosLogin.emailPasswordWidget(),
+                          ),
+                          SizedBox(
+                            height: size.width / 15,
+                          ),
+                          Container(
+                            height: size.height / 10,
+                            width: size.width / 1.5,
+                            child: RaisedButton(
+                              elevation: 0,
+                              color: Colors.transparent,
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Home(),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(vertical: 15),
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    boxShadow: <BoxShadow>[
+                                      BoxShadow(
+                                          color: darkTheme.darkTheme
+                                              ? Colors.lightBlue
+                                              : Color(0xffdf8e33)
+                                                  .withAlpha(100),
+                                          offset: Offset(2, 4),
+                                          blurRadius: 5,
+                                          spreadRadius: 2)
+                                    ],
+                                    gradient: darkTheme.darkTheme
+                                        ? botonOscuro
+                                        : botonNormal),
+                                child: Text(
+                                  'Confirmar',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: darkTheme.darkTheme
+                                          ? Colors.white
+                                          : Colors.black),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ])),
+              ]));
+    } else if (orientation == Orientation.landscape &&
+        _tapSignUp &&
+        !_tapLogin) {
+      return Container(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          height: MediaQuery.of(context).size.height,
+          decoration: darkTheme.darkTheme ? fondoOscuro : fondoNormal,
+          child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                    flex: 2,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _submitButtonLandscape(),
+                          SizedBox(
+                            height: size.width / 15,
+                          ),
+                          _signUpButtonLandscape(),
+                        ])),
+                SizedBox(width: size.width / 40),
+                Expanded(
+                  flex: 6,
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: size.width / 10,
+                      ),
+                      Container(
+                        child: formulariosSignUp.emailPasswordWidget(),
+                      ),
+                      SizedBox(
+                        height: size.width / 15,
+                      ),
+                      RaisedButton(
+                        elevation: 0,
+                        color: Colors.transparent,
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginPage(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          padding: EdgeInsets.symmetric(vertical: 15),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                    color: darkTheme.darkTheme
+                                        ? Colors.lightBlue
+                                        : Color(0xffdf8e33).withAlpha(100),
+                                    offset: Offset(2, 4),
+                                    blurRadius: 5,
+                                    spreadRadius: 2)
+                              ],
+                              gradient: darkTheme.darkTheme
+                                  ? botonOscuro
+                                  : botonNormal),
+                          child: Text(
+                            'Confirmar',
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               ]));
     }
   }
