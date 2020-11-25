@@ -383,10 +383,9 @@ class _WelcomePageState extends State<WelcomePage> {
                 Expanded(
                   flex: 6,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      SizedBox(
-                        height: size.width / 10,
-                      ),
                       Container(
                         child: formulariosSignUp.emailPasswordWidget(),
                       ),
