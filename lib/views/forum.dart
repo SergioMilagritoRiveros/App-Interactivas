@@ -15,6 +15,7 @@ class Forum extends StatefulWidget {
 
 class _ForumState extends State<Forum> {
   ForumModel _selected;
+
   Widget _landscape(Size size) {
     return Row(
       children: [
