@@ -17,6 +17,8 @@ class Forum extends StatefulWidget {
 class _ForumState extends State<Forum> {
   DarkThemeProvider darkTheme = new DarkThemeProvider();
   ForumModel _selected;
+  bool creatingNewForum = false;
+  ForumModel creatingForum;
   Widget _landscape(Size size) {
     return Row(
       children: [
@@ -36,7 +38,12 @@ class _ForumState extends State<Forum> {
                     return RaisedButton(
                       elevation: 0,
                       color: Colors.transparent,
-                      onPressed: () => setState(() => _selected = post),
+                      onPressed: () {
+                        setState(() {
+                          _selected = post;
+                          creatingNewForum = false;
+                        });
+                      },
                       child: Card(
                         child: Column(
                           children: [
@@ -65,7 +72,9 @@ class _ForumState extends State<Forum> {
             ],
           ),
         ),
-        _buildSelected(size),
+        if (_selected != null && !creatingNewForum) _buildSelected(size),
+        if (creatingNewForum)
+          Expanded(child: ForumNewPost(title: widget.title)),
       ],
     );
   }
@@ -161,15 +170,29 @@ class _ForumState extends State<Forum> {
           return _landscape(size);
         },
       ),
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: darkTheme.darkTheme ? Colors.blue : Colors.amber[700],
-          onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ForumNewPost(title: widget.title),
-                ),
-              ),
-          child: Icon(Icons.add, color: Colors.black)),
+      floatingActionButton: OrientationBuilder(
+        builder: (BuildContext context, Orientation orientation) {
+          return FloatingActionButton(
+            backgroundColor:
+                darkTheme.darkTheme ? Colors.blue : Colors.amber[700],
+            onPressed: () {
+              if (orientation == Orientation.portrait) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ForumNewPost(title: widget.title),
+                  ),
+                );
+              } else {
+                setState(() {
+                  creatingNewForum = !creatingNewForum;
+                });
+              }
+            },
+            child: Icon(Icons.add, color: Colors.black),
+          );
+        },
+      ),
     );
   }
 }
