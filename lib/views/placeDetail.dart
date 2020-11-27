@@ -1,5 +1,6 @@
 import 'package:animapp/views/ScheduleForm.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class PlaceDetail extends StatefulWidget {
   @override
@@ -177,9 +178,7 @@ class _PlaceDetailState extends State<PlaceDetail> {
                             setState(() => isScheduling = true);
                           } else {
                             Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ScheduleForm()),
+                              context, PageTransition(type: PageTransitionType.fade, child: ScheduleForm()),
                             );
                           }
                         },

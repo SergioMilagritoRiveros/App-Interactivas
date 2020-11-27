@@ -1,7 +1,6 @@
-import 'package:animapp/global.dart';
 import 'package:animapp/views/ScheduleAppointment_model.dart';
-import 'package:animapp/views/ScheduledAppointment.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class ScheduledDetail extends StatefulWidget {
   final ScheduleApponitmentModel model;
@@ -137,7 +136,7 @@ class _ScheduledDetailState extends State<ScheduledDetail> {
                 content: Text('Se ha cancelado tu cita.'),
                 action: SnackBarAction(
                   label: 'Entendido',
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () => Navigator.pop(context, PageTransition(type: PageTransitionType.fade, child: null)),
                 ),
               );
               Scaffold.of(context).showSnackBar(snackBar);

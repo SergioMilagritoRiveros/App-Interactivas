@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../widgets/InputWidget.dart';
 import '../widgets/bezierContainer.dart';
@@ -18,7 +19,10 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget _backButton() {
     return InkWell(
       onTap: () {
-        Navigator.pop(context);
+        Navigator.pushReplacement(
+          context,PageTransition(type: PageTransitionType.fade, child: LoginPage(),
+          ),
+        );
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -42,9 +46,7 @@ class _SignUpPageState extends State<SignUpPage> {
       color: Colors.transparent,
       onPressed: () {
         Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => LoginPage(),
+          context,PageTransition(type: PageTransitionType.fade, child: LoginPage(),
           ),
         );
       },
@@ -70,7 +72,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
+            context, PageTransition(type: PageTransitionType.fade, child: LoginPage()));
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20),

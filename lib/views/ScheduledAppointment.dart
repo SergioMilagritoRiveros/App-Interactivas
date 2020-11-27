@@ -1,8 +1,8 @@
-import 'package:animapp/global.dart';
 import 'package:animapp/views/ScheduleAppointment_model.dart';
 import 'package:animapp/views/ScheduledAppoinntment_detail.dart';
 import 'package:animapp/widgets/showMenu.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class ScheduledAppointment extends StatefulWidget {
   @override
@@ -129,9 +129,7 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
                   elevation: 0,
                   color: Colors.transparent,
                   onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ScheduledDetail(model: post)),
+                    context, PageTransition(type: PageTransitionType.fade, child: ScheduledDetail(model: post)),
                   ),
                   child: Card(
                     child: Column(
