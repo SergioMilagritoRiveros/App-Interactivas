@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 import 'package:animapp/global.dart';
 import 'package:animapp/views/ScheduleAppointment_model.dart';
 import 'package:animapp/views/ScheduledAppointment.dart';
+=======
+import 'package:animapp/views/ScheduleAppointment_model.dart';
+>>>>>>> a4ea9483b69345bbf7365ac2731e30115c17f4d8
 import 'package:flutter/material.dart';
 
 class ScheduledDetail extends StatefulWidget {
