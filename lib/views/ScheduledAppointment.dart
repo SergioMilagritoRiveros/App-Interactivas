@@ -1,4 +1,3 @@
-import 'package:animapp/global.dart';
 import 'package:animapp/views/ScheduleAppointment_model.dart';
 import 'package:animapp/views/ScheduledAppoinntment_detail.dart';
 import 'package:animapp/widgets/showMenu.dart';
