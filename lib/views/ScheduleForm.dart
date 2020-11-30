@@ -1,3 +1,4 @@
+import 'package:animapp/widgets/DrawerButtonAnimation.dart';
 import 'package:animapp/widgets/InputWidget.dart';
 import 'package:animapp/widgets/NavDrawer.dart';
 import 'package:flutter/material.dart';
@@ -117,36 +118,34 @@ class _ScheduleFormState extends State<ScheduleForm> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              margin: EdgeInsets.only(right: 15),
+              margin:
+                  EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
               child: RaisedButton(
-                textColor: Colors.white,
-                color: Colors.green[300],
-                onPressed: () {
-                  var snackBar = SnackBar(
-                    content: Text('Yay! se ha agendado tu cita!'),
-                    action: SnackBarAction(
-                      label: 'Cancelar',
-                      onPressed: () {},
-                    ),
-                  );
-                  // Navigator.pop(context);
-                  Scaffold.of(context).showSnackBar(snackBar);
-                },
+                onPressed: () => Navigator.pop(context),
+                color: Colors.red[300],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100.0),
+                ),
                 child: Container(
-                  child: new Text("Agendar"),
-                  width: MediaQuery.of(context).size.width / 7,
+                  margin: EdgeInsets.symmetric(vertical: 10.0,),
+                  width: MediaQuery.of(context).size.width / 4.6,
+                  height: MediaQuery.of(context).size.height / 35,
+                  child: Row(
+                    children: [
+                      Icon(Icons.arrow_back_ios),
+                      Center(
+                          child: Text(
+                        "Cancelar",
+                        style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                        ),
+                      )),
+                    ],
+                  ),
                 ),
               ),
             ),
-            RaisedButton(
-              onPressed: () => Navigator.pop(context),
-              textColor: Colors.white,
-              color: Colors.red[300],
-              child: Container(
-                child: new Text("Cancelar"),
-                width: MediaQuery.of(context).size.width / 7,
-              ),
-            ),
+            DrawerButton(),
           ],
         ),
       ],
