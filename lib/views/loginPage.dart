@@ -1,10 +1,8 @@
-import 'package:animapp/blocs/darkThemeProvider.dart';
 import 'package:animapp/views/home.dart';
 import 'package:animapp/views/whatAreYouSearchingFor.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../Styles.dart';
 import '../widgets/InputWidget.dart';
 import '../widgets/bezierContainer.dart';
 import 'forgottenPassword.dart';
@@ -16,12 +14,10 @@ class LoginPage extends StatefulWidget {
   final String title;
 
   @override
-  LoginPageState createState() => LoginPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class LoginPageState extends State<LoginPage> {
-  DarkThemeProvider darkTheme = new DarkThemeProvider();
-  
+class _LoginPageState extends State<LoginPage> {
   Widget _backButton() {
     return InkWell(
       onTap: () {
@@ -43,7 +39,7 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget submitButton() {
+  Widget _submitButton() {
     return RaisedButton(
       elevation: 0,
       color: Colors.transparent,
@@ -62,23 +58,19 @@ class LoginPageState extends State<LoginPage> {
         alignment: Alignment.center,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(5)),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                  color: darkTheme.darkTheme ? Colors.lightBlue : Color(0xffdf8e33).withAlpha(100),
-                  offset: Offset(2, 4),
-                  blurRadius: 5,
-                  spreadRadius: 2)
-            ],
-            gradient: darkTheme.darkTheme ? botonOscuro : botonNormal),
+            gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Color(0xfffbb448), Color(0xfff7892b)])),
         child: Text(
           'Ingresar',
-          style: TextStyle(fontSize: 20, color: darkTheme.darkTheme ? Colors.white : Colors.black),
+          style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),
     );
   }
 
-  Widget divider() {
+  Widget _divider() {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Row(
@@ -107,7 +99,7 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget createAccountLabel() {
+  Widget _createAccountLabel() {
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -130,7 +122,7 @@ class LoginPageState extends State<LoginPage> {
             Text(
               'Registrate',
               style: TextStyle(
-                  color: darkTheme.darkTheme ? Colors.white : Color(0xfff79c4f),
+                  color: Color(0xfff79c4f),
                   fontSize: 13,
                   fontWeight: FontWeight.w600),
             ),
@@ -140,7 +132,7 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget title() {
+  Widget _title() {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
@@ -149,13 +141,13 @@ class LoginPageState extends State<LoginPage> {
           textStyle: Theme.of(context).textTheme.display1,
           fontSize: 30,
           fontWeight: FontWeight.w700,
-          color: darkTheme.darkTheme ? Colors.blue : Color(0xffe46b10),
+          color: Color(0xffe46b10),
         ),
       ),
     );
   }
 
-  Widget emailPasswordWidget() {
+  Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
         InputWidget(
@@ -192,11 +184,11 @@ class LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(height: height * .2),
-                  title(),
+                  _title(),
                   SizedBox(height: 50),
-                  emailPasswordWidget(),
+                  _emailPasswordWidget(),
                   SizedBox(height: 20),
-                  submitButton(),
+                  _submitButton(),
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 10),
                     alignment: Alignment.centerRight,
@@ -210,9 +202,9 @@ class LoginPageState extends State<LoginPage> {
                                   builder: (context) => ForgottenPassword()));
                         }),
                   ),
-                  divider(),
+                  _divider(),
                   SizedBox(height: height * .055),
-                  createAccountLabel(),
+                  _createAccountLabel(),
                 ],
               ),
             ),

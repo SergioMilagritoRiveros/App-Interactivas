@@ -1,7 +1,5 @@
-import 'package:animapp/blocs/darkThemeProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../Styles.dart';
 
 import '../widgets/InputWidget.dart';
 import '../widgets/bezierContainer.dart';
@@ -13,12 +11,10 @@ class SignUpPage extends StatefulWidget {
   final String title;
 
   @override
-  SignUpPageState createState() => SignUpPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class SignUpPageState extends State<SignUpPage> {
-  
-  DarkThemeProvider darkTheme = new DarkThemeProvider();
+class _SignUpPageState extends State<SignUpPage> {
   Widget _backButton() {
     return InkWell(
       onTap: () {
@@ -40,7 +36,7 @@ class SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget submitButton() {
+  Widget _submitButton() {
     return RaisedButton(
       elevation: 0,
       color: Colors.transparent,
@@ -58,14 +54,10 @@ class SignUpPageState extends State<SignUpPage> {
         alignment: Alignment.center,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(5)),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                  color: darkTheme.darkTheme ? Colors.lightBlue : Color(0xffdf8e33).withAlpha(100), 
-                  offset: Offset(2, 4),
-                  blurRadius: 5,
-                  spreadRadius: 2)
-            ],
-            gradient: darkTheme.darkTheme ? botonOscuro : botonNormal),
+            gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Color(0xfffbb448), Color(0xfff7892b)])),
         child: Text(
           'Registrarse',
           style: TextStyle(fontSize: 20, color: Colors.white),
@@ -74,7 +66,7 @@ class SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget loginAccountLabel() {
+  Widget _loginAccountLabel() {
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -97,7 +89,7 @@ class SignUpPageState extends State<SignUpPage> {
             Text(
               'Ingresa',
               style: TextStyle(
-                  color: darkTheme.darkTheme ? Colors.white : Color(0xfff79c4f),
+                  color: Color(0xfff79c4f),
                   fontSize: 13,
                   fontWeight: FontWeight.w600),
             ),
@@ -107,7 +99,7 @@ class SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget title() {
+  Widget _title() {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
@@ -116,13 +108,13 @@ class SignUpPageState extends State<SignUpPage> {
           textStyle: Theme.of(context).textTheme.display1,
           fontSize: 30,
           fontWeight: FontWeight.w700,
-          color: darkTheme.darkTheme ? Colors.blue : Color(0xffe46b10),
+          color: Color(0xffe46b10),
         ),
       ),
     );
   }
 
-  Widget emailPasswordWidget() {
+  Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
         InputWidget(
@@ -164,17 +156,17 @@ class SignUpPageState extends State<SignUpPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(height: height * .2),
-                    title(),
+                    _title(),
                     SizedBox(
                       height: 50,
                     ),
-                    emailPasswordWidget(),
+                    _emailPasswordWidget(),
                     SizedBox(
                       height: 20,
                     ),
-                    submitButton(),
+                    _submitButton(),
                     SizedBox(height: height * .14),
-                    loginAccountLabel(),
+                    _loginAccountLabel(),
                   ],
                 ),
               ),
