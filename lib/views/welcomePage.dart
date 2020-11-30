@@ -1,4 +1,5 @@
 import 'package:animapp/blocs/darkThemeProvider.dart';
+import 'package:animapp/views/forgottenPassword.dart';
 import 'package:animapp/views/home.dart';
 import 'package:animapp/widgets/InputWidget.dart';
 import 'package:flutter/material.dart';
@@ -307,8 +308,21 @@ class _WelcomePageState extends State<WelcomePage> {
                             width: size.width / 1.5,
                             child: formulariosLogin.emailPasswordWidget(),
                           ),
+                          Container(
+                            alignment: Alignment.centerRight,
+                            child: FlatButton(
+                                child: Text('¿Olvidaste tu contraseña?',
+                                    style: TextStyle(fontSize: 14)),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ForgottenPassword()));
+                                }),
+                          ),
                           SizedBox(
-                            height: size.width / 15,
+                            height: size.width / 20,
                           ),
                           Container(
                             height: size.height / 10,
