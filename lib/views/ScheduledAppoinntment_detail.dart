@@ -1,3 +1,6 @@
+import 'package:animapp/global.dart';
+import 'package:animapp/views/ScheduleAppointment_model.dart';
+import 'package:animapp/views/ScheduledAppointment.dart';
 import 'package:animapp/views/ScheduleAppointment_model.dart';
 import 'package:flutter/material.dart';
 
