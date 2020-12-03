@@ -84,7 +84,7 @@ class _ForumDetailState extends State<ForumDetail> {
   }
 
   Widget _forumDetailBody(size) {
-    return Column(
+    return ListView(
       children: [
         SizedBox(height: size.height / 40),
         Text(
