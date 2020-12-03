@@ -1,15 +1,13 @@
 import 'package:animapp/views/forum_detail.dart';
 import 'package:animapp/views/forum_model.dart';
 import 'package:animapp/views/forum_new_post.dart';
+import 'package:animapp/views/post_preview.dart';
 import 'package:animapp/widgets/InputWidget.dart';
 import 'package:animapp/widgets/showMenu.dart';
 import 'package:flutter/material.dart';
-import 'package:like_button/like_button.dart';
-import 'package:animapp/extensions/hover_extensions.dart';
 
 class Forum extends StatefulWidget {
-  final String title;
-  Forum({Key key, this.title}) : super(key: key);
+  Forum({Key key}) : super(key: key);
 
   @override
   _ForumState createState() => _ForumState();
@@ -132,72 +130,10 @@ class _ForumState extends State<Forum> {
           onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ForumNewPost(title: widget.title),
+                  builder: (context) => ForumNewPost(),
                 ),
               ),
           child: Icon(Icons.add, color: Colors.black)),
-    );
-  }
-}
-
-class PostPreview extends StatefulWidget {
-  final Function onTap;
-  final ForumModel post;
-  PostPreview({Key key, this.onTap, this.post}) : super(key: key);
-
-  @override
-  _PostPreviewState createState() => _PostPreviewState();
-}
-
-class _PostPreviewState extends State<PostPreview> {
-  final BorderRadius b20 = BorderRadius.circular(20);
-  final BorderRadius b20top = BorderRadius.vertical(top: Radius.circular(20));
-
-  @override
-  Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    return Card(
-      elevation: 5.0,
-      shape: RoundedRectangleBorder(borderRadius: b20),
-      color: Colors.white,
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: b20,
-          splashColor: Colors.amber[200],
-          onTap: widget.onTap,
-          child: Column(
-            children: [
-              ClipRRect(
-                borderRadius: b20top,
-                child: Container(
-                  child: Image.network(
-                    widget.post.imageURL,
-                    width: size.width,
-                  ),
-                ),
-              ),
-              ListTile(
-                title: Text(widget.post.title),
-                subtitle: Text("Autor: ${widget.post.author}"),
-                trailing: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Container(
-                      width: 25,
-                      height: 25,
-                      child: LikeButton(
-                        size: 20,
-                      ),
-                    ),
-                    Text('${widget.post.reactions}'),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

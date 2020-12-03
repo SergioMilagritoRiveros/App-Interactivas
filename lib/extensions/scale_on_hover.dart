@@ -17,6 +17,8 @@ class _ScaleOnHoverState extends State<ScaleOnHover> {
   Widget build(BuildContext context) {
     return InkWell(
       onHover: (e) => _mouseEnter(e),
+      onTap: () {},
+      splashColor: Colors.transparent,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         child: widget.child,

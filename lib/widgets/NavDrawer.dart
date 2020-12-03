@@ -39,7 +39,7 @@ class NavDrawer extends StatelessWidget {
               iconOn: Icons.wb_sunny,
               iconOff: Icons.nightlight_round,
               textSize: 18.0,
-              onChanged: (bool position){
+              onChanged: (bool position) {
                 themeChange.darkTheme = !position;
               },
             ),
@@ -59,9 +59,7 @@ class NavDrawer extends StatelessWidget {
             title: Text('Foros'),
             onTap: () => {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => Forum(title: "Animapp")))
+                  context, MaterialPageRoute(builder: (context) => Forum()))
             },
           ),
           ListTile(

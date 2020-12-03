@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import '../widgets/InputWidget.dart';
 
 class ForumNewPost extends StatefulWidget {
-  final String title;
-  ForumNewPost({Key key, @required this.title}) : super(key: key);
+  ForumNewPost({Key key}) : super(key: key);
 
   @override
   _ForumNewPostState createState() => _ForumNewPostState();
@@ -56,9 +55,15 @@ class _ForumNewPostState extends State<ForumNewPost> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text('Publicar',style: TextStyle(color: Colors.white),),
+                    Text(
+                      'Publicar',
+                      style: TextStyle(color: Colors.white),
+                    ),
                     SizedBox(width: size.width / 25),
-                    Icon(Icons.send, color: Colors.white,),
+                    Icon(
+                      Icons.send,
+                      color: Colors.white,
+                    ),
                   ],
                 ),
               ),
@@ -69,4 +74,3 @@ class _ForumNewPostState extends State<ForumNewPost> {
     );
   }
 }
-

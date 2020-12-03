@@ -1,4 +1,6 @@
+import 'package:animapp/views/comment_view.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import '../widgets/InputWidget.dart';
 import 'forum_model.dart';
 import 'package:like_button/like_button.dart';
@@ -65,20 +67,7 @@ class _ForumDetailState extends State<ForumDetail> {
               SizedBox(width: size.width / 10),
               Column(
                 children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    child: LikeButton(
-                      circleColor: CircleColor(
-                        end: Colors.amber,
-                        start: Colors.amberAccent,
-                      ),
-                      bubblesColor: BubblesColor(
-                        dotPrimaryColor: Colors.amber,
-                        dotSecondaryColor: Colors.amberAccent,
-                      ),
-                    ),
-                  ),
+                  AnimappLikeButton(),
                   Text('${widget.forum.reactions}'),
                 ],
               )
@@ -121,20 +110,7 @@ class _ForumDetailState extends State<ForumDetail> {
               SizedBox(width: size.width / 15),
               Column(
                 children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    child: LikeButton(
-                      circleColor: CircleColor(
-                        end: Colors.amber,
-                        start: Colors.amberAccent,
-                      ),
-                      bubblesColor: BubblesColor(
-                        dotPrimaryColor: Colors.amber,
-                        dotSecondaryColor: Colors.amberAccent,
-                      ),
-                    ),
-                  ),
+                  AnimappLikeButton(),
                   Text('${widget.forum.reactions}'),
                 ],
               )
@@ -317,60 +293,41 @@ class ForumComents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: ClampingScrollPhysics(),
-      itemCount: messages.length,
-      itemBuilder: (contex, index) {
-        var message = messages[index];
-        return Padding(
-          padding: const EdgeInsets.all(5),
-          child: Card(
-              child: Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: Text(
-                            'Autor: ${message.author}',
-                            textAlign: TextAlign.justify,
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: Text(message.message),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 40,
-                  height: 40,
-                  child: LikeButton(
-                    circleColor: CircleColor(
-                      end: Colors.amber,
-                      start: Colors.amberAccent,
-                    ),
-                    bubblesColor: BubblesColor(
-                      dotPrimaryColor: Colors.amber,
-                      dotSecondaryColor: Colors.amberAccent,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )),
-        )
-      },
+    return ResponsiveBuilder(
+      builder: (context, sizing) => ListView.builder(
+        shrinkWrap: true,
+        physics: ClampingScrollPhysics(),
+        itemCount: messages.length,
+        itemBuilder: (contex, index) {
+          return sizing.isMobile
+              ? CommentView(message: messages[index]).squishOnLongPress
+              : CommentView(message: messages[index]).moveUpOnHover;
+        },
+      ),
+    );
+  }
+}
+
+class AnimappLikeButton extends StatelessWidget {
+  const AnimappLikeButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 40,
+      height: 40,
+      child: LikeButton(
+        circleColor: CircleColor(
+          end: Colors.amber,
+          start: Colors.amberAccent,
+        ),
+        bubblesColor: BubblesColor(
+          dotPrimaryColor: Colors.amber,
+          dotSecondaryColor: Colors.amberAccent,
+        ),
+      ),
     );
   }
 }

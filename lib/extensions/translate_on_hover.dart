@@ -18,6 +18,8 @@ class _TranslateOnHoverState extends State<TranslateOnHover> {
     return InkWell(
       onHover: (e) => _mouseEnter(e),
       onTap: () {},
+      splashColor: Colors.transparent,
+      hoverColor: Colors.transparent,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         child: widget.child,
