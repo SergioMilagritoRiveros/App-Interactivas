@@ -17,6 +17,7 @@ class _PlaceDetailState extends State<PlaceDetail> {
     isScheduling = false;
   }
 
+
   Widget _scheduling(BuildContext context) {
     var phoneSize = MediaQuery.of(context).size;
     return Stack(

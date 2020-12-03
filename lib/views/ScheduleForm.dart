@@ -1,6 +1,6 @@
+import 'package:animapp/views/placeDetail.dart';
 import 'package:animapp/widgets/DrawerButtonAnimation.dart';
 import 'package:animapp/widgets/InputWidget.dart';
-import 'package:animapp/widgets/NavDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -118,8 +118,8 @@ class _ScheduleFormState extends State<ScheduleForm> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              margin:
-                  EdgeInsets.only(right: MediaQuery.of(context).size.width / 20),
+              margin: EdgeInsets.only(
+                  right: MediaQuery.of(context).size.width / 20),
               child: RaisedButton(
                 onPressed: () => Navigator.pop(context),
                 color: Colors.red[300],
@@ -127,7 +127,9 @@ class _ScheduleFormState extends State<ScheduleForm> {
                   borderRadius: BorderRadius.circular(100.0),
                 ),
                 child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 10.0,),
+                  margin: EdgeInsets.symmetric(
+                    vertical: 10.0,
+                  ),
                   width: MediaQuery.of(context).size.width / 4.6,
                   height: MediaQuery.of(context).size.height / 35,
                   child: Row(
@@ -165,20 +167,26 @@ class _ScheduleFormState extends State<ScheduleForm> {
         ),
       );
     }
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('AnimaApp'),
-        backgroundColor: Colors.amber[700],
-      ),
-      backgroundColor: Colors.amberAccent[50],
-      body: Builder(
-        builder: (context) => Container(
-          padding: EdgeInsets.symmetric(
-              horizontal: phoneSize.width / 30,
-              vertical: phoneSize.height / 50),
-          child: _schedulingForm(context),
+    return OrientationBuilder(
+        builder: (BuildContext context, Orientation orientation) {
+      if (Orientation.landscape == orientation) {
+        return PlaceDetail();
+      }
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('AnimaApp'),
+          backgroundColor: Colors.amber[700],
         ),
-      ),
-    );
+        backgroundColor: Colors.amberAccent[50],
+        body: Builder(
+          builder: (context) => Container(
+            padding: EdgeInsets.symmetric(
+                horizontal: phoneSize.width / 30,
+                vertical: phoneSize.height / 50),
+            child: _schedulingForm(context),
+          ),
+        ),
+      );
+    });
   }
 }
