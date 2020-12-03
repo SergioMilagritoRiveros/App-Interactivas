@@ -369,7 +369,7 @@ class ForumComents extends StatelessWidget {
               ],
             ),
           )),
-        ).moveUpOnHover;
+        )
       },
     );
   }

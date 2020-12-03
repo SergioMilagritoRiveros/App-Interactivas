@@ -198,6 +198,6 @@ class _PostPreviewState extends State<PostPreview> {
           ),
         ),
       ),
-    ).moveUpOnHover;
+    );
   }
 }

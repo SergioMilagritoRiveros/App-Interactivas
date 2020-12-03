@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'translate_on_hover.dart';
 
 extension HoverExtension on Widget {
-  Widget get moveUpOnHover {
-    return TranslateOnHover(child: this);
-  }
+
 
   Widget get scaleUpOnHover {
     return ScaleOnHover(child: this);
