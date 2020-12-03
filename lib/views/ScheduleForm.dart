@@ -2,6 +2,7 @@ import 'package:animapp/widgets/InputWidget.dart';
 import 'package:animapp/widgets/NavDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:animated_button/animated_button.dart';
 
 class ScheduleForm extends StatefulWidget {
   final bool isIntoWidget;
@@ -118,8 +119,7 @@ class _ScheduleFormState extends State<ScheduleForm> {
           children: [
             Container(
               margin: EdgeInsets.only(right: 15),
-              child: RaisedButton(
-                textColor: Colors.white,
+              child: AnimatedButton(
                 color: Colors.green[300],
                 onPressed: () {
                   var snackBar = SnackBar(
@@ -132,20 +132,30 @@ class _ScheduleFormState extends State<ScheduleForm> {
                   // Navigator.pop(context);
                   Scaffold.of(context).showSnackBar(snackBar);
                 },
+                enabled: true,
+                shadowDegree: ShadowDegree.dark,
+                duration: 200,
+                height: 64, // Button Height, default is 64
+                width: 100,
                 child: Container(
                   child: new Text("Agendar"),
                   width: MediaQuery.of(context).size.width / 7,
                 ),
               ),
             ),
-            RaisedButton(
+            AnimatedButton(
               onPressed: () => Navigator.pop(context),
-              textColor: Colors.white,
+
               color: Colors.red[300],
               child: Container(
                 child: new Text("Cancelar"),
                 width: MediaQuery.of(context).size.width / 7,
               ),
+              enabled: true,
+              shadowDegree: ShadowDegree.dark,
+              duration: 200,
+              height: 64, // Button Height, default is 64
+              width: 100,
             ),
           ],
         ),

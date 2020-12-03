@@ -1,5 +1,6 @@
 import 'package:animapp/views/ScheduleForm.dart';
 import 'package:flutter/material.dart';
+import 'package:animated_button/animated_button.dart';
 
 class PlaceDetail extends StatefulWidget {
   @override
@@ -170,7 +171,8 @@ class _PlaceDetailState extends State<PlaceDetail> {
             orientation == Orientation.portrait || !isScheduling
                 ? ButtonBar(
                     children: <Widget>[
-                      FlatButton(
+                      AnimatedButton(
+                        color: Colors.green,
                         child: Text('Agendar Cita'),
                         onPressed: () {
                           if (orientation == Orientation.landscape) {
@@ -183,7 +185,12 @@ class _PlaceDetailState extends State<PlaceDetail> {
                             );
                           }
                         },
-                      ),
+                        enabled: true,
+                        shadowDegree: ShadowDegree.dark,
+                        duration: 200,
+                        height: 64, // Button Height, default is 64
+                        width: 100,
+                      )
                     ],
                   )
                 : Container(height: 0),

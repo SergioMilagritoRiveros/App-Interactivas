@@ -37,9 +37,9 @@ class NavDrawer extends StatelessWidget {
               colorOn: Colors.amberAccent[700],
               colorOff: Colors.grey,
               iconOn: Icons.wb_sunny,
-              iconOff: Icons.nightlight_round,
+              //iconOff: Icons.nightlight_round,
               textSize: 18.0,
-              onChanged: (bool position){
+              onChanged: (bool position) {
                 themeChange.darkTheme = !position;
               },
             ),
