@@ -14,7 +14,6 @@ class _ScheduledAppointmentState extends State<ScheduledAppointment> {
   ScheduleApponitmentModel _selected;
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text('AnimaApp'),

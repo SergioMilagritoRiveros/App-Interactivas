@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:animapp/views/ScheduleAppointment_model.dart';
+import 'package:animapp/views/ScheduledAppointment.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_progress_button/flutter_progress_button.dart';
 
 class ScheduledDetail extends StatefulWidget {
   final ScheduleApponitmentModel model;
@@ -18,23 +22,26 @@ class _ScheduledDetailState extends State<ScheduledDetail> {
     if (widget.isWidget) {
       return _scheduledDetailWidget(size);
     }
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('AnimaApp'),
-        backgroundColor: Colors.amber[700],
-      ),
-      backgroundColor: Colors.amberAccent[50],
-      body: OrientationBuilder(
+    return OrientationBuilder(
         builder: (BuildContext context, Orientation orientation) {
-          if (Orientation.portrait == orientation) {
-            return _scheduledDetailPortraitBody(size, context);
-          } else {
-            Navigator.pop(context);
-            return Container();
-          }
-        },
-      ),
-    );
+      if (Orientation.landscape == orientation) {
+        return ScheduledAppointment();
+      }
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('AnimaApp'),
+          backgroundColor: Colors.amber[700],
+        ),
+        backgroundColor: Colors.amberAccent[50],
+        body: Builder(
+          builder: (context) => Container(
+            padding: EdgeInsets.symmetric(
+                horizontal: size.width / 30, vertical: size.height / 50),
+            child: _scheduledDetailPortraitBody(size, context),
+          ),
+        ),
+      );
+    });
   }
 
   Widget _scheduledDetailWidget(Size size) {
@@ -72,31 +79,37 @@ class _ScheduledDetailState extends State<ScheduledDetail> {
           ),
           SizedBox(height: size.height / 40),
           Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              margin: EdgeInsets.only(right: size.width / 40),
-              child: RaisedButton(
-                textColor: Colors.white,
-                color: Colors.redAccent[400],
-                onPressed: () {
-                  var snackBar = SnackBar(
-                    content: Text('Se ha cancelado su cita.'),
-                    action: SnackBarAction(
-                      label: 'Entendido',
-                      onPressed: () {},
-                    ),
-                  );
-                  Scaffold.of(context).showSnackBar(snackBar);
-                },
-                child: Container(
-                  child: new Text("Cancelar", textAlign: TextAlign.center),
-                  width: MediaQuery.of(context).size.width / 7,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                margin: EdgeInsets.only(right: size.width / 40),
+                child: ProgressButton(
+                  defaultWidget: Text(
+                    'Cancelar',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  progressWidget: const CircularProgressIndicator(),
+                  color: Colors.redAccent[400],
+                  width: 196,
+                  height: 40,
+                  onPressed: () async {
+                    int score = await Future.delayed(
+                        const Duration(milliseconds: 3000), () => 42);
+                    return () {
+                      var snackBar = SnackBar(
+                        content: Text('Se ha cancelado su cita.'),
+                        action: SnackBarAction(
+                          label: 'Entendido',
+                          onPressed: () {},
+                        ),
+                      );
+                      Scaffold.of(context).showSnackBar(snackBar);
+                    };
+                  },
                 ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
         ],
       ),
     );
@@ -128,30 +141,30 @@ class _ScheduledDetailState extends State<ScheduledDetail> {
           SizedBox(height: size.height / 40),
           Text('Fecha/Hora: ${widget.model.date}'),
           SizedBox(height: size.height / 40),
-          RaisedButton(
-            color: Colors.redAccent[400],
-            onPressed: () {
-              var snackBar = SnackBar(
-                content: Text('Se ha cancelado tu cita.'),
-                action: SnackBarAction(
-                  label: 'Entendido',
-                  onPressed: () => Navigator.pop(context),
+          ProgressButton(
+                  defaultWidget: Text(
+                    'Cancelar',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  progressWidget: const CircularProgressIndicator(),
+                  color: Colors.redAccent[400],
+                  width: 196,
+                  height: 40,
+                  onPressed: () async {
+                    int score = await Future.delayed(
+                        const Duration(milliseconds: 3000), () => 42);
+                    return () {
+                      var snackBar = SnackBar(
+                        content: Text('Se ha cancelado su cita.'),
+                        action: SnackBarAction(
+                          label: 'Entendido',
+                          onPressed: () {},
+                        ),
+                      );
+                      Scaffold.of(context).showSnackBar(snackBar);
+                    };
+                  },
                 ),
-              );
-              Scaffold.of(context).showSnackBar(snackBar);
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: size.height / 50),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text('Cancelar',
-                      style: TextStyle(color: Colors.white),
-                      textAlign: TextAlign.center),
-                ],
-              ),
-            ),
-          )
         ],
       ),
     );

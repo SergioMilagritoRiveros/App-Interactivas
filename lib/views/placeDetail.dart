@@ -1,5 +1,7 @@
 import 'package:animapp/views/ScheduleForm.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:like_button/like_button.dart';
 
 import '../global.dart';
 
@@ -11,8 +13,6 @@ class PlaceDetail extends StatefulWidget {
 }
 
 class _PlaceDetailState extends State<PlaceDetail> {
-
-
   Widget _scheduling(BuildContext context) {
     var phoneSize = MediaQuery.of(context).size;
     return Stack(
@@ -52,7 +52,7 @@ class _PlaceDetailState extends State<PlaceDetail> {
     return OrientationBuilder(
       builder: (BuildContext context, Orientation orientation) {
         if (Orientation.landscape == orientation) {
-           print(isScheduling);
+          print(isScheduling);
           if (isScheduling) {
             return Scaffold(body: _scheduling(context));
           }
@@ -129,8 +129,7 @@ class _PlaceDetailState extends State<PlaceDetail> {
             Row(
               children: [
                 Container(
-                  padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
-                  child: Text("4.0", style: TextStyle(color: Colors.grey)),
+                  padding: EdgeInsets.fromLTRB(8, 15, 6, 15),
                 ),
                 _stars(),
               ],
@@ -197,18 +196,40 @@ class _PlaceDetailState extends State<PlaceDetail> {
     );
   }
 
+  Widget _uniqueStar() {
+    return LikeButton(
+      size: 25,
+      circleColor:
+          CircleColor(start: Color(0xff00ddff), end: Color(0xff0099cc)),
+      bubblesColor: BubblesColor(
+        dotPrimaryColor: Color(0xff33b5e5),
+        dotSecondaryColor: Color(0xff0099cc),
+      ),
+      likeBuilder: (bool isLiked) {
+        return Icon(
+          Icons.star,
+          color: isLiked ? Colors.amberAccent : Colors.grey,
+          size: 25,
+        );
+      },
+    );
+  }
+
   Widget _stars() {
     return Align(
-      alignment: Alignment.center,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: List.generate(5, (index) {
-          return Icon(
-            index < 4 ? Icons.star : Icons.star_border,
-            color: Colors.amber[400],
-          );
-        }),
-      ),
-    );
+        alignment: Alignment.center,
+        child: Row(
+          children: [
+            _uniqueStar(),
+            SizedBox(),
+            _uniqueStar(),
+            SizedBox(),
+            _uniqueStar(),
+            SizedBox(),
+            _uniqueStar(),
+            SizedBox(),
+            _uniqueStar(),
+          ],
+        ));
   }
 }
