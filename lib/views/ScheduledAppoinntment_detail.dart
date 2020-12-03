@@ -158,7 +158,7 @@ class _ScheduledDetailState extends State<ScheduledDetail> {
                         content: Text('Se ha cancelado su cita.'),
                         action: SnackBarAction(
                           label: 'Entendido',
-                          onPressed: () {},
+                          onPressed: () => Navigator.pop(context),
                         ),
                       );
                       Scaffold.of(context).showSnackBar(snackBar);
