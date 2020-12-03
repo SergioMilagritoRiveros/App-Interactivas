@@ -16,7 +16,7 @@ dependencies:
   custom_switch:
   lite_rolling_switch:
   ff_navigation_bar: ^0.1.4
-
+  like_button: ^1.0.4
 
   cupertino_icons: ^0.1.3
   intl: ^0.16.1 # Date formater
