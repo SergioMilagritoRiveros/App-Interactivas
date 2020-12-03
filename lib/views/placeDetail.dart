@@ -1,6 +1,8 @@
 import 'package:animapp/views/ScheduleForm.dart';
 import 'package:flutter/material.dart';
 
+import '../global.dart';
+
 class PlaceDetail extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -9,13 +11,6 @@ class PlaceDetail extends StatefulWidget {
 }
 
 class _PlaceDetailState extends State<PlaceDetail> {
-  bool isScheduling;
-
-  @override
-  void initState() {
-    super.initState();
-    isScheduling = false;
-  }
 
 
   Widget _scheduling(BuildContext context) {
@@ -57,6 +52,7 @@ class _PlaceDetailState extends State<PlaceDetail> {
     return OrientationBuilder(
       builder: (BuildContext context, Orientation orientation) {
         if (Orientation.landscape == orientation) {
+           print(isScheduling);
           if (isScheduling) {
             return Scaffold(body: _scheduling(context));
           }
