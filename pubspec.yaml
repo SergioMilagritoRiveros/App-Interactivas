@@ -16,6 +16,9 @@ dependencies:
   custom_switch:
   lite_rolling_switch:
   ff_navigation_bar: ^0.1.4
+  flutter_rating_bar: ^1.1.0
+  like_button: ^1.0.4
+  flutter_progress_button: '^1.0.0'
   page_transition: "^1.1.7+2"
 
 
