@@ -5,6 +5,7 @@ import 'package:animapp/views/post_preview.dart';
 import 'package:animapp/widgets/InputWidget.dart';
 import 'package:animapp/widgets/showMenu.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class Forum extends StatefulWidget {
   Forum({Key key}) : super(key: key);
@@ -128,9 +129,7 @@ class _ForumState extends State<Forum> {
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.amber[700],
           onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ForumNewPost(),
+                context, PageTransition(type: PageTransitionType.fade, child: ForumNewPost(),
                 ),
               ),
           child: Icon(Icons.add, color: Colors.black)),

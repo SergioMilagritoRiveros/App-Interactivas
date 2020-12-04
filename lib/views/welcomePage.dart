@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'loginPage.dart';
 import 'signup.dart';
 
@@ -18,7 +19,7 @@ class _WelcomePageState extends State<WelcomePage> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
+            context, PageTransition(type: PageTransitionType.fade, child: LoginPage()));
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -46,7 +47,7 @@ class _WelcomePageState extends State<WelcomePage> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
+            context, PageTransition(type: PageTransitionType.fade, child: LoginPage()));
       },
       child: Container(
         width: size.width / 2,
@@ -74,7 +75,7 @@ class _WelcomePageState extends State<WelcomePage> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SignUpPage()));
+            context, PageTransition(type: PageTransitionType.fade, child:SignUpPage()));
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -96,7 +97,7 @@ class _WelcomePageState extends State<WelcomePage> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SignUpPage()));
+            context,PageTransition(type: PageTransitionType.fade, child: SignUpPage()));
       },
       child: Container(
         width: size.width / 2,

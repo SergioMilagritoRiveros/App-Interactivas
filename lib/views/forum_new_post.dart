@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../widgets/InputWidget.dart';
 
@@ -49,7 +50,7 @@ class _ForumNewPostState extends State<ForumNewPost> {
             SizedBox(height: size.height / 30),
             RaisedButton(
               color: Colors.amber[700],
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => Navigator.pop(context, PageTransition(type: PageTransitionType.fade, child: null)),
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: size.height / 50),
                 child: Row(
