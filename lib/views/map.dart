@@ -24,7 +24,7 @@ class _MapPageState extends State<MapPage> {
       appBar: AppBar(
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
-            onPressed: () => Navigator.pop(context)),
+            onPressed: () => Navigator.pop(context, PageTransition(type: PageTransitionType.fade, child: null))),
         title: Text('AnimaApp'),
         backgroundColor: Colors.amber[700],
       ),
