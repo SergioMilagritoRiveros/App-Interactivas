@@ -1,16 +1,15 @@
+import 'package:animapp/views/comment_view.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import '../widgets/InputWidget.dart';
 import 'forum_model.dart';
+import 'package:like_button/like_button.dart';
+import 'package:animapp/extensions/hover_extensions.dart';
 
 class ForumDetail extends StatefulWidget {
-  final String title;
   final ForumModel forum;
   final bool isWidget;
-  ForumDetail(
-      {Key key,
-      @required this.title,
-      @required this.forum,
-      this.isWidget = false})
+  ForumDetail({Key key, @required this.forum, this.isWidget = false})
       : super(key: key);
 
   @override
@@ -66,38 +65,14 @@ class _ForumDetailState extends State<ForumDetail> {
               SizedBox(width: size.width / 10),
               Column(
                 children: [
-                  IconButton(
-                      icon: Icon(Icons.favorite_border), onPressed: () => null),
+                  AnimappLikeButton(),
                   Text('${widget.forum.reactions}'),
                 ],
               )
             ],
           ),
         ),
-        ListView.builder(
-          shrinkWrap: true,
-          physics: ClampingScrollPhysics(),
-          itemCount: widget.forum.messages.length,
-          itemBuilder: (contex, index) {
-            var message = widget.forum.messages[index];
-            return Card(
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: size.width / 50,
-                  vertical: size.height / 45,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Autor: ${message.author}'),
-                    SizedBox(height: size.height / 45),
-                    Text(message.message),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
+        ForumComents(messages: widget.forum.messages),
         Container(
           padding: EdgeInsets.symmetric(horizontal: size.width / 15),
           child: InputWidget(labelText: 'Comentar', icon: Icons.forum),
@@ -107,7 +82,7 @@ class _ForumDetailState extends State<ForumDetail> {
   }
 
   Widget _forumDetailBody(size) {
-    return Column(
+    return ListView(
       children: [
         SizedBox(height: size.height / 40),
         Text(
@@ -131,38 +106,14 @@ class _ForumDetailState extends State<ForumDetail> {
               SizedBox(width: size.width / 15),
               Column(
                 children: [
-                  IconButton(
-                      icon: Icon(Icons.favorite_border), onPressed: () => null),
+                  AnimappLikeButton(),
                   Text('${widget.forum.reactions}'),
                 ],
               )
             ],
           ),
         ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: widget.forum.messages.length,
-            itemBuilder: (contex, index) {
-              var message = widget.forum.messages[index];
-              return Card(
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: size.width / 10,
-                    vertical: size.height / 45,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Autor: ${message.author}'),
-                      SizedBox(height: size.height / 45),
-                      Text(message.message),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
+        ForumComents(messages: widget.forum.messages),
         Container(
           padding: EdgeInsets.symmetric(horizontal: size.width / 15),
           child: InputWidget(labelText: 'Comentar', icon: Icons.forum),
@@ -188,7 +139,9 @@ class _ForumDetailState extends State<ForumDetail> {
               Container(
                 margin: EdgeInsets.only(top: size.height / 50),
                 height: size.height / 3,
-                child: Image.network(widget.forum.imageURL),
+                child: SplashNetworkImage(
+                  src: widget.forum.imageURL,
+                ),
               ),
               Container(
                 padding: EdgeInsets.symmetric(vertical: size.height / 50),
@@ -199,9 +152,20 @@ class _ForumDetailState extends State<ForumDetail> {
                     SizedBox(width: size.width / 15),
                     Column(
                       children: [
-                        IconButton(
-                            icon: Icon(Icons.favorite_border),
-                            onPressed: () => null),
+                        Container(
+                          width: 40,
+                          height: 40,
+                          child: LikeButton(
+                            circleColor: CircleColor(
+                              end: Colors.amber,
+                              start: Colors.amberAccent,
+                            ),
+                            bubblesColor: BubblesColor(
+                              dotPrimaryColor: Colors.amber,
+                              dotSecondaryColor: Colors.amberAccent,
+                            ),
+                          ),
+                        ),
                         Text('${widget.forum.reactions}'),
                       ],
                     )
@@ -215,31 +179,7 @@ class _ForumDetailState extends State<ForumDetail> {
           width: size.width / 2,
           child: Column(
             children: [
-              Expanded(
-                child: ListView.builder(
-                  itemCount: widget.forum.messages.length,
-                  itemBuilder: (contex, index) {
-                    var message = widget.forum.messages[index];
-                    return Card(
-                      child: Container(
-                        width: size.width / 2,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: size.width / 30,
-                          vertical: size.height / 45,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Autor: ${message.author}'),
-                            SizedBox(height: size.height / 45),
-                            Text(message.message),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
+              ForumComents(messages: widget.forum.messages),
               Container(
                 child: InputWidget(labelText: 'Comentar', icon: Icons.forum),
               ),
@@ -247,6 +187,143 @@ class _ForumDetailState extends State<ForumDetail> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class AnimatedHearthButton extends StatefulWidget {
+  final double iconSize;
+  AnimatedHearthButton({Key key, this.iconSize: 30}) : super(key: key);
+
+  @override
+  _AnimatedHearthButtonState createState() => _AnimatedHearthButtonState();
+}
+
+class _AnimatedHearthButtonState extends State<AnimatedHearthButton> {
+  double opacity = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          splashColor: Colors.red[100],
+          borderRadius: BorderRadius.circular(30),
+          onTap: () {
+            setState(() {
+              if (opacity == 0) {
+                opacity = 1;
+              } else {
+                opacity = 0;
+              }
+            });
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(4),
+            child: Stack(
+              children: [
+                Icon(Icons.favorite_border, size: widget.iconSize),
+                AnimatedOpacity(
+                  opacity: opacity,
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.ease,
+                  child: Icon(
+                    Icons.favorite,
+                    color: Colors.red,
+                    size: widget.iconSize,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SplashNetworkImage extends StatefulWidget {
+  final String src;
+  SplashNetworkImage({Key key, this.src}) : super(key: key);
+
+  @override
+  _SplashNetworkImageState createState() => _SplashNetworkImageState();
+}
+
+class _SplashNetworkImageState extends State<SplashNetworkImage> {
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Image.network(
+          widget.src,
+          fit: BoxFit.cover,
+        ),
+        Container(
+          color: Colors.transparent,
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              splashColor: Colors.amber.withOpacity(0.2),
+              onTap: () {},
+              child: Image.network(
+                widget.src,
+                fit: BoxFit.cover,
+                color: Colors.transparent,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ForumComents extends StatelessWidget {
+  final List<ForumMessageModel> messages;
+  const ForumComents({Key key, @required this.messages}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ResponsiveBuilder(
+      builder: (context, sizing) => ListView.builder(
+        shrinkWrap: true,
+        physics: ClampingScrollPhysics(),
+        itemCount: messages.length,
+        itemBuilder: (contex, index) {
+          return sizing.isMobile
+              ? CommentView(message: messages[index]).squishOnLongPress
+              : CommentView(message: messages[index]).moveUpOnHover;
+        },
+      ),
+    );
+  }
+}
+
+class AnimappLikeButton extends StatelessWidget {
+  const AnimappLikeButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 40,
+      height: 40,
+      child: LikeButton(
+        circleColor: CircleColor(
+          end: Colors.amber,
+          start: Colors.amberAccent,
+        ),
+        bubblesColor: BubblesColor(
+          dotPrimaryColor: Colors.amber,
+          dotSecondaryColor: Colors.amberAccent,
+        ),
+      ),
     );
   }
 }

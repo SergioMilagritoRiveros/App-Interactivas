@@ -1,14 +1,14 @@
 import 'package:animapp/views/forum_detail.dart';
 import 'package:animapp/views/forum_model.dart';
 import 'package:animapp/views/forum_new_post.dart';
+import 'package:animapp/views/post_preview.dart';
 import 'package:animapp/widgets/InputWidget.dart';
 import 'package:animapp/widgets/showMenu.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Forum extends StatefulWidget {
-  final String title;
-  Forum({Key key, this.title}) : super(key: key);
+  Forum({Key key}) : super(key: key);
 
   @override
   _ForumState createState() => _ForumState();
@@ -33,31 +33,13 @@ class _ForumState extends State<Forum> {
                   itemCount: forumPost.length,
                   itemBuilder: (context, index) {
                     var post = forumPost[index];
-                    return RaisedButton(
-                      elevation: 0,
-                      color: Colors.transparent,
-                      onPressed: () => setState(() => _selected = post),
-                      child: Card(
-                        child: Column(
-                          children: [
-                            Image.network(post.imageURL, width: size.width),
-                            ListTile(
-                              title: Text(post.title),
-                              subtitle: Text("Autor: ${post.author}"),
-                              trailing: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Icon(Icons.favorite_border),
-                                  Text('${post.reactions}'),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        elevation: 5.0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                      ),
+                    return PostPreview(
+                      onTap: () {
+                        setState(() {
+                          _selected = post;
+                        });
+                      },
+                      post: post,
                     );
                   },
                 ),
@@ -76,7 +58,6 @@ class _ForumState extends State<Forum> {
         padding: EdgeInsets.only(left: size.width / 50),
         width: 2 * size.width / 3,
         child: ForumDetail(
-          title: widget.title,
           forum: _selected,
           isWidget: true,
         ),
@@ -98,37 +79,21 @@ class _ForumState extends State<Forum> {
               itemCount: forumPost.length,
               itemBuilder: (context, index) {
                 var post = forumPost[index];
-                return RaisedButton(
-                  elevation: 0,
-                  color: Colors.transparent,
-                  onPressed: () => Navigator.push(
-                    context,
-                    PageTransition(
-                      type: PageTransitionType.fade,
-                      child: ForumDetail(title: widget.title, forum: post),
-                    ),
-                  ),
-                  child: Card(
-                    child: Column(
-                      children: [
-                        Image.network(post.imageURL, width: size.width),
-                        ListTile(
-                          title: Text(post.title),
-                          subtitle: Text("Autor: ${post.author}"),
-                          trailing: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Icon(Icons.favorite_border),
-                              Text('${post.reactions}'),
-                            ],
+                return PostPreview(
+                  onTap: () {
+                    setState(
+                      () {
+                        _selected = post;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ForumDetail(forum: post),
                           ),
-                        ),
-                      ],
-                    ),
-                    elevation: 5.0,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                  ),
+                        );
+                      },
+                    );
+                  },
+                  post: post,
                 );
               },
             ),
@@ -164,7 +129,7 @@ class _ForumState extends State<Forum> {
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.amber[700],
           onPressed: () => Navigator.push(
-                context, PageTransition(type: PageTransitionType.fade, child: ForumNewPost(title: widget.title),
+                context, PageTransition(type: PageTransitionType.fade, child: ForumNewPost(),
                 ),
               ),
           child: Icon(Icons.add, color: Colors.black)),
