@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../widgets/InputWidget.dart';
 import '../widgets/bezierContainer.dart';
@@ -17,7 +18,7 @@ class _ForgottenPasswordState extends State<ForgottenPassword> {
   Widget _backButton() {
     return InkWell(
       onTap: () {
-        Navigator.pop(context);
+        Navigator.pop(context, PageTransition(type: PageTransitionType.fade, child: null));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -40,7 +41,7 @@ class _ForgottenPasswordState extends State<ForgottenPassword> {
     Widget okButton = FlatButton(
       child: Text("OK"),
       onPressed: () {
-        Navigator.pop(context);
+        Navigator.pop(context, PageTransition(type: PageTransitionType.fade, child: null));
       },
     );
 

@@ -2,6 +2,7 @@ import 'package:animapp/widgets/InputWidget.dart';
 import 'package:animapp/widgets/NavDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:page_transition/page_transition.dart';
 
 class ScheduleForm extends StatefulWidget {
   final bool isIntoWidget;
@@ -129,7 +130,6 @@ class _ScheduleFormState extends State<ScheduleForm> {
                       onPressed: () {},
                     ),
                   );
-                  // Navigator.pop(context);
                   Scaffold.of(context).showSnackBar(snackBar);
                 },
                 child: Container(
@@ -139,7 +139,7 @@ class _ScheduleFormState extends State<ScheduleForm> {
               ),
             ),
             RaisedButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => Navigator.pop(context, PageTransition(type: PageTransitionType.fade, child: null)),
               textColor: Colors.white,
               color: Colors.red[300],
               child: Container(

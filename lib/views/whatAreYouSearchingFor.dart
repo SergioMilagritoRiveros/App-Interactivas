@@ -1,14 +1,10 @@
-import 'package:animapp/blocs/darkThemeProvider.dart';
-import 'package:animapp/global.dart';
 import 'package:animapp/views/map.dart';
-import 'package:animapp/views/welcomePage.dart';
-import 'package:animapp/widgets/NavDrawer.dart';
 import 'package:animapp/widgets/showMenu.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:animapp/views/placeDetail.dart';
-import 'package:provider/provider.dart';
+import 'package:page_transition/page_transition.dart';
 import '../widgets/bezierContainer.dart';
 
 class WhatAreYouSearchingFor extends StatefulWidget {
@@ -38,8 +34,8 @@ class _WhatAreYouSearchingForState extends State<WhatAreYouSearchingFor> {
       onPressed: () {
         if (!_isLandscape)
           Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => MapPage()),
+            context, PageTransition(type: PageTransitionType.fade, child: MapPage()
+            ),
           );
       },
       child: Container(

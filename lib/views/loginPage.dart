@@ -1,7 +1,8 @@
 import 'package:animapp/views/home.dart';
-import 'package:animapp/views/whatAreYouSearchingFor.dart';
+import 'package:animapp/views/welcomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../widgets/InputWidget.dart';
 import '../widgets/bezierContainer.dart';
@@ -21,7 +22,10 @@ class _LoginPageState extends State<LoginPage> {
   Widget _backButton() {
     return InkWell(
       onTap: () {
-        Navigator.pop(context);
+        Navigator.pushReplacement(
+          context,PageTransition(type: PageTransitionType.fade, child: WelcomePage(),
+          ),
+        );
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -47,8 +51,9 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pop(context);
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(
-            builder: (context) => Home(),
+          PageTransition(
+            type: PageTransitionType.fade,
+            child: Home(),
           ),
         );
       },
@@ -102,8 +107,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget _createAccountLabel() {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SignUpPage()));
+        Navigator.push(context,
+            PageTransition(type: PageTransitionType.fade, child: SignUpPage()));
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20),
@@ -198,8 +203,9 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {
                           Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => ForgottenPassword()));
+                              PageTransition(
+                                  type: PageTransitionType.fade,
+                                  child: ForgottenPassword()));
                         }),
                   ),
                   _divider(),
