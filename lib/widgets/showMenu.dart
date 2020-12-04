@@ -2,6 +2,7 @@ import 'package:animapp/blocs/darkThemeProvider.dart';
 import 'package:animapp/global.dart';
 import 'package:animapp/views/welcomePage.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 void showPopupMenu(context) async {
@@ -16,7 +17,7 @@ void showPopupMenu(context) async {
               var provider =
                   Provider.of<DarkThemeProvider>(context, listen: false);
               provider.darkTheme = value;
-              Navigator.pop(context);
+              Navigator.pop(context, PageTransition(type: PageTransitionType.fade, child: null));
             },
             title: Text('Nocturno')),
         value: 'DarkMode',
@@ -27,9 +28,7 @@ void showPopupMenu(context) async {
             onTap: () {
               Navigator.pop(context);
               Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => WelcomePage(),
+                context, PageTransition(type: PageTransitionType.fade, child: WelcomePage(),
                 ),
               );
             },

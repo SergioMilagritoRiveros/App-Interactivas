@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:animapp/views/placeDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:page_transition/page_transition.dart';
 
 class MapPage extends StatefulWidget {
   MapPage({Key key, this.title}) : super(key: key);
@@ -23,7 +24,7 @@ class _MapPageState extends State<MapPage> {
       appBar: AppBar(
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
-            onPressed: () => Navigator.pop(context)),
+            onPressed: () => Navigator.pop(context, PageTransition(type: PageTransitionType.fade, child: null))),
         title: Text('AnimaApp'),
         backgroundColor: Colors.amber[700],
       ),
@@ -45,8 +46,7 @@ class _MapPageState extends State<MapPage> {
         markerId: MarkerId('llegar'),
         position: LatLng(4.742877841155348, -74.03123976473584),
         onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => PlaceDetail()),
+          context, PageTransition(type: PageTransitionType.fade, child:PlaceDetail()),
         ),
       ),
     );
