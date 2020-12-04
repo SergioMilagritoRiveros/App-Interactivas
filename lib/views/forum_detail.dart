@@ -54,9 +54,7 @@ class _ForumDetailState extends State<ForumDetail> {
         Container(
           margin: EdgeInsets.only(top: size.height / 30),
           height: size.height / 2,
-          child: SplashNetworkImage(
-            src: widget.forum.imageURL,
-          ),
+          child: Image.network(widget.forum.imageURL),
         ),
         Container(
           padding: EdgeInsets.symmetric(vertical: size.height / 50),
@@ -97,9 +95,7 @@ class _ForumDetailState extends State<ForumDetail> {
         ),
         Container(
           height: size.height / 5,
-          child: SplashNetworkImage(
-            src: widget.forum.imageURL,
-          ),
+          child: Image.network(widget.forum.imageURL),
         ),
         Container(
           padding: EdgeInsets.symmetric(vertical: size.height / 50),
