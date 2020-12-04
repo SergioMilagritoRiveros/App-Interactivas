@@ -20,8 +20,8 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  var _tapLogin = false;
-  var _tapSignUp = false;
+  static var _tapLogin = false;
+  static var _tapSignUp = false;
   Size size;
   LoginPageState formulariosLogin = new LoginPageState();
   SignUpPageState formulariosSignUp = new SignUpPageState();
@@ -56,6 +56,7 @@ class _WelcomePageState extends State<WelcomePage> {
       onTap: () {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => LoginPage()));
+            changePositionLogin();
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -115,6 +116,7 @@ class _WelcomePageState extends State<WelcomePage> {
       onTap: () {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => SignUpPage()));
+            changePositionSignUp();
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -300,7 +302,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            height: size.height / 5,
+                            height: size.height / 4,
                             width: size.width / 1.5,
                             child: formulariosLogin.emailPasswordWidget(),
                           ),

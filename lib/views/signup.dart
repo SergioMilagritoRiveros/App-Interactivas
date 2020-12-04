@@ -137,7 +137,9 @@ class SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    Orientation orientation = MediaQuery.of(context).orientation;
     final height = MediaQuery.of(context).size.height;
+    if(orientation == Orientation.portrait){
     return Scaffold(
       body: Container(
         height: height,
@@ -176,5 +178,8 @@ class SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+    } else {
+      Navigator.pop(context);
+    }
   }
 }
