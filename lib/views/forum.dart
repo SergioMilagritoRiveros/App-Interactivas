@@ -107,16 +107,6 @@ class _ForumState extends State<Forum> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('AnimaApp'),
-        backgroundColor: Colors.amber[700],
-        actions: [
-          IconButton(
-            icon: Icon(Icons.more_vert),
-            onPressed: () => showPopupMenu(context),
-          )
-        ],
-      ),
       backgroundColor: Colors.amberAccent[50],
       body: OrientationBuilder(
         builder: (BuildContext context, Orientation orientation) {

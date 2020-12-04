@@ -4,6 +4,7 @@ import 'package:animapp/views/forum.dart';
 import 'package:animapp/views/whatAreYouSearchingFor.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:animapp/widgets/showMenu.dart';
 
 class Home extends StatefulWidget {
   Home({Key key}) : super(key: key);
@@ -45,6 +46,16 @@ class _HomeState extends State<Home> {
       );
     }
     return Scaffold(
+       appBar: AppBar(
+        title: Text('AnimaApp'),
+        backgroundColor: Colors.amber[700],
+        actions: [
+          IconButton(
+            icon: Icon(Icons.more_vert),
+            onPressed: () => showPopupMenu(context),
+          )
+        ],
+      ),
       body: views[selectedIndex],
       bottomNavigationBar: FFNavigationBar(
         theme: _bottomNavigationBar,

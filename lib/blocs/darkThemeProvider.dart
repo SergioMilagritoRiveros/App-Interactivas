@@ -1,5 +1,6 @@
 import 'package:animapp/blocs/DarkThemePreference.dart';
 import 'package:flutter/material.dart';
+import 'package:animapp/global.dart';
 
 class DarkThemeProvider with ChangeNotifier {
   DarkThemePreference darkThemePreference = DarkThemePreference();
@@ -9,6 +10,7 @@ class DarkThemeProvider with ChangeNotifier {
 
   set darkTheme(bool value) {
     _darkTheme = value;
+    isDarkMode = value;
     darkThemePreference.setDarkTheme(value);
     notifyListeners();
   }

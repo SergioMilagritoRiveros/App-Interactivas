@@ -26,7 +26,6 @@ class _PostPreviewState extends State<PostPreview> {
     var postPreviewMobile = Card(
       elevation: 5.0,
       shape: RoundedRectangleBorder(borderRadius: b10),
-      color: isDarkMode ? Colors.grey.shade800 : Colors.white,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -47,15 +46,9 @@ class _PostPreviewState extends State<PostPreview> {
               ListTile(
                 title: Text(
                   widget.post.title,
-                  style: TextStyle(
-                    color: isDarkMode ? Colors.white : Colors.black,
-                  ),
                 ),
                 subtitle: Text(
                   "Autor: ${widget.post.author}",
-                  style: TextStyle(
-                    color: isDarkMode ? Colors.white : Colors.black,
-                  ),
                 ),
                 trailing: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -100,15 +93,9 @@ class _PostPreviewState extends State<PostPreview> {
               ListTile(
                 title: Text(
                   widget.post.title,
-                  style: TextStyle(
-                    color: isDarkMode ? Colors.white : Colors.black,
-                  ),
                 ),
                 subtitle: Text(
                   "Autor: ${widget.post.author}",
-                  style: TextStyle(
-                    color: isDarkMode ? Colors.white : Colors.black,
-                  ),
                 ),
                 trailing: Column(
                   mainAxisSize: MainAxisSize.max,
