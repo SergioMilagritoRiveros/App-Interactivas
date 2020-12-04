@@ -209,7 +209,7 @@ class _WelcomePageState extends State<WelcomePage> {
           child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20),
         height: MediaQuery.of(context).size.height,
-        decoration: darkTheme.darkTheme ? fondoOscuro : fondoNormal,
+        decoration: fondoNormal,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -236,7 +236,7 @@ class _WelcomePageState extends State<WelcomePage> {
       return Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           height: MediaQuery.of(context).size.height,
-          decoration: darkTheme.darkTheme ? fondoOscuro : fondoNormal,
+          decoration: fondoNormal,
           child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -276,7 +276,7 @@ class _WelcomePageState extends State<WelcomePage> {
       return Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           height: MediaQuery.of(context).size.height,
-          decoration: darkTheme.darkTheme ? fondoOscuro : fondoNormal,
+          decoration: fondoNormal,
           child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -368,7 +368,7 @@ class _WelcomePageState extends State<WelcomePage> {
       return Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           height: MediaQuery.of(context).size.height,
-          decoration: darkTheme.darkTheme ? fondoOscuro : fondoNormal,
+          decoration: fondoNormal,
           child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
