@@ -3,6 +3,7 @@ import 'package:animapp/widgets/DrawerButtonAnimation.dart';
 import 'package:animapp/widgets/InputWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../global.dart';
 
@@ -123,7 +124,7 @@ class _ScheduleFormState extends State<ScheduleForm> {
               margin: EdgeInsets.only(
                   right: MediaQuery.of(context).size.width / 20),
               child: RaisedButton(
-                onPressed: () => Navigator.pop(context),
+                onPressed: () => Navigator.pop(context, PageTransition(type: PageTransitionType.fade, child: null)),
                 color: Colors.red[300],
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0),
@@ -201,7 +202,7 @@ class _ScheduleFormState extends State<ScheduleForm> {
               margin: EdgeInsets.only(
                   right: MediaQuery.of(context).size.width / 20),
               child: RaisedButton(
-                onPressed: () => Navigator.pop(context),
+                onPressed: () => Navigator.pop(context, PageTransition(type: PageTransitionType.fade, child: null)),
                 color: Colors.red[300],
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0),

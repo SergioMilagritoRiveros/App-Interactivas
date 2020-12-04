@@ -19,6 +19,7 @@ dependencies:
   flutter_rating_bar: ^1.1.0
   like_button: ^1.0.4
   flutter_progress_button: '^1.0.0'
+  page_transition: "^1.1.7+2"
 
 
   cupertino_icons: ^0.1.3
