@@ -37,11 +37,7 @@ class _ForgottenPasswordState extends State<ForgottenPassword>
   @override
   void initState() {
     super.initState();
-    if(!darkTheme.darkTheme){
-      _color = Colors.orange;
-    } else {
-      _color = Colors.lightBlue;
-    }
+    _color = Colors.orange;
     _animationController = AnimationController(
         vsync: this, duration: Duration(milliseconds: 1300));
     show = true;
@@ -51,11 +47,7 @@ class _ForgottenPasswordState extends State<ForgottenPassword>
         _animationValue = _animationController.value;
         if (_animationValue >= 0.2 && _animationValue < 0.4) {
           _containerPaddingLeft = 100.0;
-          if(!darkTheme.darkTheme){
-            _color = Colors.orangeAccent;
-          } else {
-            _color = Colors.blue;
-          }
+          _color = Colors.orangeAccent;
         } else if (_animationValue >= 0.4 && _animationValue <= 0.5) {
           _translateX = 80.0;
           _rotate = -20.0;
@@ -200,7 +192,7 @@ class _ForgottenPasswordState extends State<ForgottenPassword>
           textStyle: Theme.of(context).textTheme.display1,
           fontSize: 30,
           fontWeight: FontWeight.w700,
-          color: darkTheme.darkTheme ? Colors.blue : Color(0xffe46b10),
+          color:Color(0xffe46b10),
         ),
       ),
     );

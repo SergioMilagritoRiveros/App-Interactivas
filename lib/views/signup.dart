@@ -11,10 +11,10 @@ class SignUpPage extends StatefulWidget {
   final String title;
 
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  SignUpPageState createState() => SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class SignUpPageState extends State<SignUpPage> {
   Widget _backButton() {
     return InkWell(
       onTap: () {
@@ -114,7 +114,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _emailPasswordWidget() {
+  Widget emailPasswordWidget() {
     return Column(
       children: <Widget>[
         InputWidget(
@@ -160,7 +160,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     SizedBox(
                       height: 50,
                     ),
-                    _emailPasswordWidget(),
+                    emailPasswordWidget(),
                     SizedBox(
                       height: 20,
                     ),

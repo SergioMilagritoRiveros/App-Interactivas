@@ -14,10 +14,10 @@ class LoginPage extends StatefulWidget {
   final String title;
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  LoginPageState createState() => LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class LoginPageState extends State<LoginPage> {
   Widget _backButton() {
     return InkWell(
       onTap: () {
@@ -147,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _emailPasswordWidget() {
+  Widget emailPasswordWidget() {
     return Column(
       children: <Widget>[
         InputWidget(
@@ -186,7 +186,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: height * .2),
                   _title(),
                   SizedBox(height: 50),
-                  _emailPasswordWidget(),
+                  emailPasswordWidget(),
                   SizedBox(height: 20),
                   _submitButton(),
                   Container(
