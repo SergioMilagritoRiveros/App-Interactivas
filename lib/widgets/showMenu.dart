@@ -17,7 +17,7 @@ void showPopupMenu(context) async {
               var provider =
                   Provider.of<DarkThemeProvider>(context, listen: false);
               provider.darkTheme = value;
-              Navigator.pop(context, PageTransition(type: PageTransitionType.fade, child: null));
+              Navigator.pop(context);
             },
             title: Text('Nocturno')),
         value: 'DarkMode',
