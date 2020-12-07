@@ -296,73 +296,68 @@ class _WelcomePageState extends State<WelcomePage> {
                           _signUpButtonLandscape(),
                         ])),
                 Expanded(
-                    flex: 6,
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: size.height / 4,
-                            width: size.width / 1.5,
-                            child: formulariosLogin.emailPasswordWidget(),
-                          ),
-                          Container(
+                  flex: 6,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        child: formulariosLogin.emailPasswordWidget(),
+                      ),
+                      SizedBox(
+                        height: size.width / 20,
+                      ),
+                      Container(
                             alignment: Alignment.centerRight,
-                            child: FlatButton(
+                            child: InkWell(
                                 child: Text('¿Olvidaste tu contraseña?',
                                     style: TextStyle(fontSize: 14)),
-                                onPressed: () {
+                                onTap: () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               ForgottenPassword()));
                                 }),
-                          ),
-                          SizedBox(
-                            height: size.width / 20,
-                          ),
-                          Container(
-                            height: size.height / 10,
-                            width: size.width / 1.5,
-                            child: RaisedButton(
-                              elevation: 0,
-                              color: Colors.transparent,
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Home(),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(vertical: 15),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
-                                    boxShadow: <BoxShadow>[
-                                      BoxShadow(
-                                          color: Color(0xffdf8e33)
-                                                  .withAlpha(100),
-                                          offset: Offset(2, 4),
-                                          blurRadius: 5,
-                                          spreadRadius: 2)
-                                    ],
-                                    gradient: botonNormal),
-                                child: Text(
-                                  'Confirmar',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      color: darkTheme.darkTheme
-                                          ? Colors.white
-                                          : Colors.black),
-                                ),
-                              ),
+                          ),  
+                      SizedBox(
+                        height: size.width / 30,
+                      ),
+                      RaisedButton(
+                        elevation: 0,
+                        color: Colors.transparent,
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginPage(),
                             ),
+                          );
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          padding: EdgeInsets.symmetric(vertical: 15),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                    color: Color(0xffdf8e33).withAlpha(100),
+                                    offset: Offset(2, 4),
+                                    blurRadius: 5,
+                                    spreadRadius: 2)
+                              ],
+                              gradient: botonNormal),
+                          child: Text(
+                            'Confirmar',
+                            style: TextStyle(fontSize: 20, color: Colors.white),
                           ),
-                        ])),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               ]));
     } else if (orientation == Orientation.landscape &&
         _tapSignUp &&
