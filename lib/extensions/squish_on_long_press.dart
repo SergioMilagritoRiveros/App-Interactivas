@@ -33,6 +33,8 @@ class _SquishOnLongPressState extends State<SquishOnLongPress>
       onLongPress: _longPress,
       onTap: () {},
       splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      focusColor: Colors.transparent,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         child: widget.child,

@@ -13,7 +13,6 @@ class PlaceDetail extends StatefulWidget {
 }
 
 class _PlaceDetailState extends State<PlaceDetail> {
-  var currentScore = 0;
   Widget _scheduling(BuildContext context) {
     var phoneSize = MediaQuery.of(context).size;
     return Stack(
@@ -174,10 +173,7 @@ class _PlaceDetailState extends State<PlaceDetail> {
                             setState(() => isScheduling = true);
                           } else {
                             Navigator.push(
-                              context,
-                              PageTransition(
-                                  type: PageTransitionType.fade,
-                                  child: ScheduleForm()),
+                              context, PageTransition(type: PageTransitionType.fade, child: ScheduleForm()),
                             );
                           }
                         },
@@ -198,7 +194,7 @@ class _PlaceDetailState extends State<PlaceDetail> {
     );
   }
 
-  Widget _uniqueStar(int score) {
+  Widget _uniqueStar() {
     return LikeButton(
       size: 25,
       circleColor:
@@ -206,17 +202,6 @@ class _PlaceDetailState extends State<PlaceDetail> {
       bubblesColor: BubblesColor(
         dotPrimaryColor: Color(0xff33b5e5),
         dotSecondaryColor: Color(0xff0099cc),
-      ),
-      isLiked: score <= currentScore,
-      onTap: (isLiked) => Future.delayed(
-        Duration(milliseconds: 1),
-        () {
-          setState(() {
-            currentScore = score;
-          });
-
-          return !isLiked;
-        },
       ),
       likeBuilder: (bool isLiked) {
         return Icon(
@@ -233,15 +218,15 @@ class _PlaceDetailState extends State<PlaceDetail> {
         alignment: Alignment.center,
         child: Row(
           children: [
-            _uniqueStar(1),
+            _uniqueStar(),
             SizedBox(),
-            _uniqueStar(2),
+            _uniqueStar(),
             SizedBox(),
-            _uniqueStar(3),
+            _uniqueStar(),
             SizedBox(),
-            _uniqueStar(4),
+            _uniqueStar(),
             SizedBox(),
-            _uniqueStar(5),
+            _uniqueStar(),
           ],
         ));
   }
