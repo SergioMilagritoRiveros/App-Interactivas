@@ -1,6 +1,5 @@
 import 'package:animapp/views/ScheduleForm.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:like_button/like_button.dart';
 
 import '../global.dart';
@@ -14,6 +13,7 @@ class PlaceDetail extends StatefulWidget {
 }
 
 class _PlaceDetailState extends State<PlaceDetail> {
+  var currentScore = 0;
   Widget _scheduling(BuildContext context) {
     var phoneSize = MediaQuery.of(context).size;
     return Stack(
@@ -197,8 +197,6 @@ class _PlaceDetailState extends State<PlaceDetail> {
       child: BackButton(color: Colors.white),
     );
   }
-
-  var currentScore = 0;
 
   Widget _uniqueStar(int score) {
     return LikeButton(
