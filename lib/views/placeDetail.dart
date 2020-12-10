@@ -1,5 +1,6 @@
 import 'package:animapp/views/ScheduleForm.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:like_button/like_button.dart';
 
 import '../global.dart';
@@ -173,7 +174,10 @@ class _PlaceDetailState extends State<PlaceDetail> {
                             setState(() => isScheduling = true);
                           } else {
                             Navigator.push(
-                              context, PageTransition(type: PageTransitionType.fade, child: ScheduleForm()),
+                              context,
+                              PageTransition(
+                                  type: PageTransitionType.fade,
+                                  child: ScheduleForm()),
                             );
                           }
                         },
@@ -194,7 +198,9 @@ class _PlaceDetailState extends State<PlaceDetail> {
     );
   }
 
-  Widget _uniqueStar() {
+  var currentScore = 0;
+
+  Widget _uniqueStar(int score) {
     return LikeButton(
       size: 25,
       circleColor:
@@ -202,6 +208,17 @@ class _PlaceDetailState extends State<PlaceDetail> {
       bubblesColor: BubblesColor(
         dotPrimaryColor: Color(0xff33b5e5),
         dotSecondaryColor: Color(0xff0099cc),
+      ),
+      isLiked: score <= currentScore,
+      onTap: (isLiked) => Future.delayed(
+        Duration(milliseconds: 1),
+        () {
+          setState(() {
+            currentScore = score;
+          });
+
+          return !isLiked;
+        },
       ),
       likeBuilder: (bool isLiked) {
         return Icon(
@@ -218,15 +235,15 @@ class _PlaceDetailState extends State<PlaceDetail> {
         alignment: Alignment.center,
         child: Row(
           children: [
-            _uniqueStar(),
+            _uniqueStar(1),
             SizedBox(),
-            _uniqueStar(),
+            _uniqueStar(2),
             SizedBox(),
-            _uniqueStar(),
+            _uniqueStar(3),
             SizedBox(),
-            _uniqueStar(),
+            _uniqueStar(4),
             SizedBox(),
-            _uniqueStar(),
+            _uniqueStar(5),
           ],
         ));
   }
