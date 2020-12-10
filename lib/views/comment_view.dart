@@ -12,7 +12,7 @@ class CommentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.all(5),
       child: Card(
           child: Padding(

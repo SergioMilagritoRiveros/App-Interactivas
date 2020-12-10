@@ -54,13 +54,9 @@ class _ForumState extends State<Forum> {
 
   Widget _buildSelected(Size size) {
     if (_selected != null) {
-      return Container(
-        padding: EdgeInsets.only(left: size.width / 50),
-        width: 2 * size.width / 3,
-        child: ForumDetail(
-          forum: _selected,
-          isWidget: true,
-        ),
+      return ForumDetail(
+        forum: _selected,
+        isWidget: true,
       );
     }
     return Container();
@@ -119,7 +115,10 @@ class _ForumState extends State<Forum> {
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.amber[700],
           onPressed: () => Navigator.push(
-                context, PageTransition(type: PageTransitionType.fade, child: ForumNewPost(),
+                context,
+                PageTransition(
+                  type: PageTransitionType.fade,
+                  child: ForumNewPost(),
                 ),
               ),
           child: Icon(Icons.add, color: Colors.black)),
