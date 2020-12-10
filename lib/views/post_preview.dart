@@ -119,7 +119,7 @@ class _PostPreviewState extends State<PostPreview> {
 
     return ResponsiveBuilder(builder: (context, sizing) {
       return sizing.isDesktop
-          ? postPreviewDesktop.moveUpOnHover
+          ? postPreviewDesktop
           : postPreviewMobile.squishOnLongPress;
     });
   }
